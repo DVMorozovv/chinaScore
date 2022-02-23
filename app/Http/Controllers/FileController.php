@@ -113,9 +113,9 @@ class FileController extends Controller
             }
             $items = $data['items'];
 
-            // чтение файла
-            $reader = new \PhpOffice\PhpSpreadsheet\Reader\XlsX();
-            $reader->setLoadSheetsOnly($sheet, $sheet_img);
+//            // чтение файла
+//            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+//            $reader->setLoadSheetsOnly($sheet, $sheet_img);
 
             foreach($items as $item){
                 $sheet->setCellValue('A'.$i,  $item['Id'] );
