@@ -1,0 +1,81 @@
+{
+  "menu": [
+    {
+      "url": "home",
+      "name": "Home",
+      "i18n": "ToDo",
+      "class": "waves-effect waves-cyan",
+      "icon": "check",
+      "slug": "app-todo"
+    },
+
+    {
+      "navheader": "Search",
+      "icon": "more_horiz"
+    },
+    {
+      "url": "categories",
+      "name": "Categories",
+      "i18n": "Chat",
+      "class": "waves-effect waves-cyan",
+      "icon": "chat_bubble_outline",
+      "slug": "app-chat"
+    },
+    {
+      "url": "search-title",
+      "name": "Title",
+      "i18n": "Chat",
+      "class": "waves-effect waves-cyan",
+      "icon": "chat_bubble_outline",
+      "slug": "app-chat"
+    },
+    {
+      "url": "search-photo",
+      "name": "Photo",
+      "i18n": "Chat",
+      "class": "waves-effect waves-cyan",
+      "icon": "chat_bubble_outline",
+      "slug": "app-chat"
+    },
+    {
+      "navheader": "Profile",
+      "icon": "more_horiz"
+    },
+    {
+      "url": "profile-settings",
+      "name": "User",
+      "i18n": "Chat",
+      "class": "waves-effect waves-cyan",
+      "icon": "chat_bubble_outline",
+      "slug": "app-chat"
+    },
+    {
+      "url": "home",
+      "name": "Money",
+      "i18n": "Chat",
+      "class": "waves-effect waves-cyan",
+      "icon": "chat_bubble_outline",
+      "slug": "app-chat"
+    },
+    {
+      "url": "user-files",
+      "name": "Files",
+      "i18n": "Chat",
+      "class": "waves-effect waves-cyan",
+      "icon": "chat_bubble_outline",
+      "slug": "app-chat"
+    },
+    {
+      "navheader": "Поддержка",
+      "icon": "more_horiz"
+    },
+    {
+      "url": "support",
+      "name": "Support",
+      "i18n": "Chat",
+      "class": "waves-effect waves-cyan",
+      "icon": "chat_bubble_outline",
+      "slug": "app-chat"
+    }
+  ]
+}
