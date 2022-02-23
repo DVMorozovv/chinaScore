@@ -43,7 +43,7 @@ class ProfileController extends Controller
         $file = new File();
         $file->name = "items.xlsx";
         $file->path = "$filename";
-        $file->user_id = '0';
+        $file->user_id = '1';
         $file->size = "$s";
         $file->save();
         echo $s;
@@ -61,7 +61,7 @@ class ProfileController extends Controller
         $file = new File();
         $file->name = "items.xlsx";
         $file->path = "$filename";
-        $file->user_id = '0';
+        $file->user_id = '1';
         $file->size = "$s";
         $file->save();
         echo $s;
