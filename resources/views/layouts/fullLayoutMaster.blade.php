@@ -10,7 +10,7 @@ $configData = Helper::applClasses();
 Template Name: Materialize - Material Design Admin Template
 Author: PixInvent
 Website: http://www.pixinvent.com/
-Contact: hello@pixinvent.com
+Support: hello@pixinvent.com
 Follow: www.twitter.com/pixinvents
 Like: www.facebook.com/pixinvents
 Purchase: https://themeforest.net/item/materialize-material-design-admin-template/11446068?ref=pixinvent

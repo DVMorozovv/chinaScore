@@ -2,7 +2,7 @@
 @extends('layouts.contentLayoutMaster')
 
 {{-- page title --}}
-@section('title','Page Contact')
+@section('title','Page Support')
 
 {{-- vendor styles --}}
 @section('vendor-style')
@@ -17,7 +17,7 @@
 
 {{-- page content --}}
 @section('content')
-    <!-- Contact Us -->
+    <!-- Support Us -->
     <div id="contact-us" class="section">
         <div class="app-wrapper">
             <div class="contact-header">
@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <!-- Contact Sidenav -->
+            <!-- Support Sidenav -->
             <div id="sidebar-list" class="row contact-sidenav ml-0 mr-0">
                 <div class="col s12 m12 l4">
                     <!-- Sidebar Area Starts -->
