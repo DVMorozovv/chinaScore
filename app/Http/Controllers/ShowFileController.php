@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tariff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\File;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 
-class ProfileController extends Controller
+class ShowFileController extends Controller
 {
     static function filesize_format($filesize)
     {
@@ -30,15 +31,17 @@ class ProfileController extends Controller
         return $filesize.$formats[$format];
     }
     public function files(Request $req){
-        $user = Auth::user();
-        $user_id = $user->id;
-        $files = new File();
-        $files = DB::table('files')->where('user_id', '=', "$user_id")->get();
+        $user_id = Auth::user()->getAuthIdentifier();
+        $files = File::select()->where('user_id', '=', "$user_id")->get();
 
 
         return view('pages/user-files',  ['files'=>$files]);
+    }
 
-
-
+    public function download_file(Request $req){
+        $file_id = $req->get('file_id');
+        $file = File::find($file_id);
+        $file_path = $file->path;
+        return response()->download(public_path("$file_path"));
     }
 }

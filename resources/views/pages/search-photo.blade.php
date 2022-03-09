@@ -18,7 +18,7 @@
 
 {{-- page content --}}
 @section('content')
-    <h4>Seach by photo</h4>
+    <h4 class="mt-4 mb-2">Поиск по картинке</h4>
 @endsection
 
 {{-- vendor scripts --}}

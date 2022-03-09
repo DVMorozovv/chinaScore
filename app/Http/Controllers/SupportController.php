@@ -5,21 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 
-class ContactController extends Controller
+class SupportController extends Controller
 {
-    public function ContactForm(Request $req){
-        $contact = new Contact();
+    public function SupportForm(Request $req){
 
         $validate = $req->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone-demo' => 'required',
-            'message' => 'nullable|max:255',
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'phone-demo' => 'required|numeric',
+            'message' => 'required|max:1500',
         ]);
         $name = $validate['name'];
         $email = $validate['email'];
         $phone = $validate['phone-demo'];
         $message = $validate['message'];
+
+        $contact = new Contact();
 
         $contact->name = $name;
         $contact->email = $email;
@@ -27,6 +28,5 @@ class ContactController extends Controller
         $contact->message = $message;
         $contact->save();
 
-        return view('pages/support');
-    }
+        return redirect()->back()->withSuccess('Ваше сообщение отправлено');    }
 }

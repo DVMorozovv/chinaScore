@@ -14,16 +14,16 @@ class Helper
             'pageHeader' => false,
             'bodyCustomClass' => '',
             'navbarLarge' => false,
-            'navbarBgColor' => '',
+            'navbarBgColor' => 'gradient-45deg-purple-deep-orange',
             'isNavbarDark' => null,
             'isNavbarFixed' => true,
-            'activeMenuColor' => '',
+            'activeMenuColor' => 'gradient-45deg-purple-deep-orange',
             'isMenuDark' => null,
             'isMenuCollapsed' => false,
             'activeMenuType' => '',
             'isFooterDark' => null,
             'isFooterFixed' => false,
-            'templateTitle' => '',
+            'templateTitle' => 'ChinaScore',
             'isCustomizer' => false,
             'defaultLanguage'=>'en',
             'largeScreenLogo' => 'images/logo/materialize-logo-color.png',
@@ -102,7 +102,7 @@ class Helper
         ];
         //activeMenuTypeClass array contain active menu class of sidenav according to layout types
         $activeMenuTypeClass = [
-            'vertical-modern-menu' => 'sidenav-active-square',
+            'vertical-modern-menu' => 'sidenav-active-rounded',
             'vertical-menu-nav-dark' => 'sidenav-active-rounded',
             'vertical-gradient-menu' => 'sidenav-active-rounded',
             'vertical-dark-menu' => 'sidenav-active-rounded',
@@ -118,7 +118,7 @@ class Helper
         ];
         //navbarMainColor array contain navabar's color classes according to layout types
         $navbarMainColor = [
-            'vertical-modern-menu' => 'navbar-dark gradient-45deg-indigo-purple',
+            'vertical-modern-menu' => 'navbar-dark gradient-45deg-purple-deep-orange',
             'vertical-menu-nav-dark' => 'navbar-dark gradient-45deg-purple-deep-orange',
             'vertical-gradient-menu' => 'navbar-light',
             'vertical-dark-menu' => 'navbar-light',
@@ -126,7 +126,7 @@ class Helper
         ];
         //navbarLargeColor array contain navbarlarge's default color classes
         $navbarLargeColor = [
-            'vertical-modern-menu' => 'gradient-45deg-indigo-purple',
+            'vertical-modern-menu' => 'gradient-45deg-purple-deep-orange',
             'vertical-menu-nav-dark' => 'blue-grey lighten-5',
             'vertical-gradient-menu' => 'blue-grey lighten-5',
             'vertical-dark-menu' => 'blue-grey lighten-5',
@@ -142,7 +142,7 @@ class Helper
         ];
         //mainFooterColor array contain footer's color classes
         $mainFooterColor = [
-            'vertical-modern-menu' => 'footer-dark gradient-45deg-indigo-purple',
+            'vertical-modern-menu' => 'footer-dark gradient-45deg-purple-deep-orange',
             'vertical-menu-nav-dark' => 'footer-dark gradient-45deg-purple-deep-orange',
             'vertical-gradient-menu' => 'footer-light',
             'vertical-dark-menu' => 'footer-light',

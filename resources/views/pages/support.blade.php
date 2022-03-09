@@ -94,16 +94,9 @@
                 </div>
                 <div class="col s12 m12 l8 contact-form margin-top-contact">
                     <div class="row">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <form class="col s12" action="{{ route('contactForm') }}">
+                        @include('panels.alert')
+                        <form class="col s12" action="{{ route('contactForm') }}" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="input-field col m6 s12">
                                     <input id="name" name="name" type="text" class="validate" value="@if(auth()->user()){{ Auth::user()->name }} @endif">
@@ -116,7 +109,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col m12 s12">
-                                    <input id="phone-demo" name="phone-demo" type="text" class="">
+                                    <input id="phone-demo" name="phone-demo" type="text" class=""  value="{{ old('phone-demo') }}">
                                     <label for="phone-demo">Phone</label>
                                 </div>
                                 <div class="input-field col s12 width-100">
@@ -137,4 +130,6 @@
 @section('page-script')
     <script src="{{asset('js/scripts/page-contact.js')}}"></script>
     <script src="{{asset('js/scripts/form-masks.js')}}"></script>
+    <script src="{{asset('js/scripts/ui-alerts.js')}}"></script>
+
 @endsection

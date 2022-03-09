@@ -11,12 +11,12 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Carbon\Carbon;
 
-class FileController extends Controller
+class CreateFileController extends Controller
 {
     public static function saveFile($filename){
         $user = Auth::user();
         $user_id = $user->id;
-        $size = ProfileController::filesize_format(filesize("files/"."$filename"));
+        $size = ShowFileController::filesize_format(filesize("files/"."$filename"));
         $file = new File();
         $file->name = "$filename";
         $file->path = "files/"."$filename";
@@ -210,13 +210,6 @@ class FileController extends Controller
             $writer->save("$file_path");
         }
         self::saveFile("$file_name".".xlsx");
-        return response()->download(public_path("$file_path"));
-    }
-
-    public function download_file(Request $req){
-        $file_id = $req->get('file_id');
-        $file = File::find($file_id);
-        $file_path = $file->path;
         return response()->download(public_path("$file_path"));
     }
 }

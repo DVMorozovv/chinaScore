@@ -18,7 +18,6 @@
       <div class="row">
         <div class="input-field col s12">
           <h5 class="ml-4">Регистрация</h5>
-{{--          <p class="ml-4">Join to our community now !</p>--}}
         </div>
       </div>
       <div class="row margin">

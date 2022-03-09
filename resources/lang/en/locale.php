@@ -1,6 +1,5 @@
 <?php
 return [
-    "Test"=>"Test",
     "Home"=>"Главная",
     "Menu"=>"Меню",
     "Search"=>"Поиск",

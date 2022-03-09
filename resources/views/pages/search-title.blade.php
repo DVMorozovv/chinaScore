@@ -18,17 +18,17 @@
 
 {{-- page content --}}
 @section('content')
-    <h4>Seach by title</h4>
-    <div class="mb-2">
+
+    <div class="mb-2 mt-4">
         <h4>Искать по названию</h4>
-        <form class="formValidate" action="{{ route('search_form', $id) }}" method="GET">
+        <form class="formValidate" action="{{ route('search_form', $id) }}" method="POST">
             @csrf
             <div class="row ">
                 <div class="col s10 m11 l11">
                     <input class="form-control" type="text" name="title" id="title" placeholder="Поиск по названию" required minlength="1">
                 </div>
                 <div class="col s2 m1 l1 center-align mt-1">
-                    <button class="waves-effect waves-light btn-floating" type="submit"><i class="material-icons">search</i></button>
+                    <button class="waves-effect waves-light btn-floating gradient-45deg-purple-deep-orange" type="submit"><i class="material-icons">search</i></button>
                 </div>
             </div>
         </form>
@@ -46,6 +46,4 @@
 {{-- page scripts --}}
 @section('page-script')
     <script src="{{asset('js/scripts/advance-ui-modals.js')}}"></script>
-
-
 @endsection

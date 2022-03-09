@@ -1,5 +1,3 @@
-
-
 {{-- layout extend --}}
 @extends('layouts.contentLayoutMaster')
 
@@ -33,25 +31,18 @@
         <h4>Искать по всем категориям</h4>
         @endif
 
-        <form action="{{ route('search_cat_form', $id) }}" method="GET">
+        <form action="{{ route('search_cat_form', $id) }}" method="POST">
             @csrf
             <div class="row">
                 <div class="col s10 m11 l11">
-                    <input class="form-control" type="text" name="title" id="title" placeholder="Поиск по названию" >
+                    <input class="form-control" type="text" name="title" id="title" required minlength="1" placeholder="Поиск по названию" >
                 </div>
                 <input type="hidden" name="cat_name"  value="{{ $cat_name }}"/>
                 <div class="col s2 m1 l1 center-align mt-1">
-                    <button class="waves-effect waves-light btn-floating" type="submit"><i class="material-icons">search</i></button>
+                    <button class="waves-effect waves-light btn-floating gradient-45deg-purple-deep-orange" type="submit"><i class="material-icons">search</i></button>
                 </div>
             </div>
         </form>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul class="errors">
-                                <li>Пустой запрос</li>
-                            </ul>
-                        </div>
-                    @endif
 
         @if(isset($title))
             <div class="search_title" ><h5>Поиск: {{ $title }}</h5></div>
@@ -76,7 +67,7 @@
         <div class="col s12 m8 l6"><h6>Найдено товаров: {{ $total_count }}</h6></div>
         <!-- <div class="col-3"><h4>id:{{-- {{ $id }} --}}</h4></div> -->
         <div class="col s12 m4 l6 center">
-            <a class="waves-effect waves-light btn modal-trigger btn_min_width"  href="#modal1"><i class="material-icons right">file_download</i>Скачать</a>
+            <a class="waves-effect waves-light btn modal-trigger btn_min_width gradient-45deg-purple-deep-orange"  href="#modal1"><i class="material-icons right">file_download</i>Скачать</a>
         </div>
     </div>
 
@@ -92,12 +83,8 @@
     <div class="modal-content">
       <h4 class="modal-title" id="exampleModalToggleLabel">Modal 1</h4>
       <div class="modal-body">
-        @if(isset($title))
-            <form action="{{ route('create', [ $id, 'title' => $title]) }}" method="GET">
-        @else
-            <form action="{{ route('create', $id) }}" method="GET">
-        @endif
-            @csrf
+        <form action="@if(isset($title)){{ route('create', [ $id, 'title' => $title]) }}@else{{ route('create', $id) }}@endif" method="GET">
+        @csrf
             <div class="">
                 <div class="input-field col s12">
                     <select name="filter" class="" aria-label="Default select example">
@@ -113,10 +100,10 @@
                     <input type="hidden" name="title"  value="{{ $title }}" />
                 @endif
                 <div class="">
-                    <button class="btn  btn-primary form_btn" type="submit">Скачать</button>
+                    <button class="btn  btn-primary form_btn gradient-45deg-purple-deep-orange" type="submit">Скачать</button>
                 </div>
             </div>
-            </form>
+        </form>
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Продолжить</button>
@@ -139,6 +126,5 @@
 {{-- page scripts --}}
 @section('page-script')
 <script src="{{asset('js/scripts/advance-ui-modals.js')}}"></script>
-
 
 @endsection

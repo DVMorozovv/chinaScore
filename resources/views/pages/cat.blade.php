@@ -27,27 +27,21 @@
     @if(isset($id))
         <div class="mb-2">
             <h4>Искать по всем категориям</h4>
-            <form action="{{ route('search_form', $id) }}" method="GET">
+            <form action="{{ route('search_form', $id) }}" method="POST">
                 @csrf
                 <div class="row ">
                     <div class="col s10 m11 l11"><input class="form-control" type="text" name="title" id="title" placeholder="Поиск по названию" required minlength="1" ></div>
                     <div class="col s2 m1 l1 center-align mt-1">
-                        <button class="waves-effect waves-light btn-floating" type="submit"><i class="material-icons">search</i></button>
+                        <button class="waves-effect waves-light btn-floating gradient-45deg-purple-deep-orange" type="submit"><i class="material-icons">search</i></button>
                     </div>
                 </div>
             </form>
         </div>
-{{--        @if ($errors->any())--}}
-{{--            <div class="alert alert-danger">--}}
-{{--                <ul class="errors">--}}
-{{--                    <li>Пустой запрос</li>--}}
-{{--                </ul>--}}
-{{--            </div>--}}
-{{--        @endif--}}
     @endif
 
     @if(empty($categories))
-        <h2>Категорий нет</h2>
+        <h4>Подкатегорий нет</h4>
+        <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange" href="#">Скачать информацию по всем товарам данной категории</a>
     @endif
 
     @for($i = 0; $i < count($categories); $i++)
@@ -59,7 +53,7 @@
         <div class="row  mb-1">
             <div class="col s10 m11 l11"><a class="categorie_name a_color" href="{{ route ('categories_child', $categories[$i]['Id']) }}">{{ $categories[$i]['Name'] }}</a></div>
             <div class="col s2 m1 l1 center-align">
-                <a  href="{{ route ('get_item_by_cat', [ $categories[$i]['Id'], 'cat_name' => $categories[$i]['Name']] ) }}" class="waves-effect waves-light btn-floating"><i class="material-icons">file_download</i></a>
+                <a  href="{{ route ('get_item_by_cat', [ $categories[$i]['Id'], 'cat_name' => $categories[$i]['Name']] ) }}" class="waves-effect waves-light btn-floating gradient-45deg-purple-deep-orange"><i class="material-icons">file_download</i></a>
             </div>
         </div>
         @endif
