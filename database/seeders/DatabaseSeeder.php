@@ -35,6 +35,15 @@ class DatabaseSeeder extends Seeder
             'updated_at'  => date('Y-m-d H:i:s')
         ]);
 
+        DB::table('roles')->insert([
+            'name' => 'user',
+            'guard_name' => 'web1',
+        ]);
+        DB::table('roles')->insert([
+            'name' => 'admin',
+            'guard_name' => 'web2',
+        ]);
+
         DB::table('model_has_roles')->insert([
             'role_id' => '2',
             'model_type' => 'App\Models\User',
