@@ -21,7 +21,7 @@ return[
     "Pricing"=> "Preços",
     "Invoice"=> "Fatura",
     "Pages"=> "Páginas",
-    "Contact"=> "Contato",
+    "Support"=> "Contato",
     "Blog"=> "Blog",
     "Search"=> "Procurar",
     "Knowledge"=> "Conhecimento",

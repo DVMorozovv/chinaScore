@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
     "Dashboard"=> "Instrumententafel",
     "Modern"=> "Modern",
@@ -21,7 +21,7 @@ return [
     "Pricing"=> "Preisgestaltung",
     "Invoice"=> "Rechnung",
     "Pages"=> "Seiten",
-    "Contact"=> "Kontakt",
+    "Support"=> "Kontakt",
     "Blog"=> "Blog",
     "Search"=> "Suche",
     "Knowledge"=> "Wissen",

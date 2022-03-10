@@ -21,7 +21,7 @@ return [
     "Pricing"=> "Prix",
     "Invoice"=> "Facture d'achat",
     "Pages"=> "Des pages",
-    "Contact"=> "Contact",
+    "Support"=> "Support",
     "Blog"=> "Blog",
     "Search"=> "Chercher",
     "Knowledge"=> "Connaissance",

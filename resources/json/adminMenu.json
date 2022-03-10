@@ -1,0 +1,34 @@
+{
+    "menu": [
+        {
+            "navheader": "Админ-панель",
+            "icon": "more_horiz"
+        },
+        {
+            "url": "admin",
+            "name": "Home",
+            "i18n": "ToDo",
+            "class": "waves-effect waves-cyan",
+            "icon": "check",
+            "slug": "app-todo"
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Tariff",
+            "i18n": "ToDo",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "icon": "chat_bubble_outline",
+            "slug": "app-todo",
+            "submenu": [
+                {
+                    "url": "#",
+                    "name": "Show",
+                    "i18n": "Modern",
+                    "slug": "dashboard-modern"
+                }
+            ]
+        }
+
+
+    ]
+}

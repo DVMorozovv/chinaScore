@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,6 +13,11 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\SearchTitleController;
 use App\Http\Controllers\ShowFileController;
 use App\Http\Controllers\EditProfileController;
+use App\Http\Controllers\ReferralController;
+
+// Admin Controllers
+
+use App\Http\Controllers\Admin\AdminController;
 
 
 
@@ -68,6 +74,8 @@ Route::get('/profile-settings', function ()
     {return view('pages/profile-settings');
 })->middleware('auth')->name('profile-settings');
 
+Route::get('/referral', [ReferralController::class, 'refer'])->middleware('auth')->name('referral');
+
 Route::post('/profile-settings/edit', [EditProfileController::class, 'RedactProfileForm'])->middleware('auth')->name('RedactProfileForm');
 
 Route::get('/user-files', [ShowFileController::class, 'files'])->middleware('auth')->name('user-files');
@@ -79,3 +87,6 @@ Route::get('/support', function () {return view('pages/support');})->name('suppo
 Route::post('/support/send', [SupportController::class, 'SupportForm'])->name('contactForm');
 
 
+Route::group(['middleware' => ['role:admin', 'auth'], 'prefix' => 'admin'], function () {
+    Route::get('/', [AdminController::class, 'index']);
+});

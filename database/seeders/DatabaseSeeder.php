@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Tariff;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -32,6 +33,12 @@ class DatabaseSeeder extends Seeder
             'duration' => 30,
             'created_at'  => date('Y-m-d H:i:s'),
             'updated_at'  => date('Y-m-d H:i:s')
+        ]);
+
+        DB::table('model_has_roles')->insert([
+            'role_id' => '2',
+            'model_type' => 'App\Models\User',
+            'model_id' => '1',
         ]);
     }
 }

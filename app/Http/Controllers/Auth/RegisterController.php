@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,6 +24,64 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+
+
+    /* REF */
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm(Request $request)
+    {
+        if ($request->has('ref')) {
+            session(['referrer' => $request->query('ref')]);
+        }
+
+        return view('auth.register');
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        if ($user->referrer !== null) {
+//            Notification::send($user->referrer, new ReferralBonus($user));
+        }
+        return redirect($this->redirectPath());
+    }
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param array $data
+     *
+     * @return \App\Models\User
+     */
+    protected function create(array $data)
+    {
+//        $referrer = User::whereid(session()->pull('referrer'))->first();
+        $referrer = User::where('id', '=', session()->pull('referrer'))->first();
+
+
+        $user = User::create([
+            'name'        => $data['name'],
+            'email'       => $data['email'],
+            'referrer_id' => $referrer ? $referrer->id : null,
+            'password'    => Hash::make($data['password']),
+        ]);
+
+        $user->assignRole('user');
+        return $user;
+    }
+
+    /* END REF */
 
     /**
      * Where to redirect users after registration.
@@ -56,28 +115,20 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
+//    /**
+//     * Create a new user instance after a valid registration.
+//     *
+//     * @param  array  $data
+//     * @return \App\Models\User
+//     */
+//    protected function create(array $data)
+//    {
+//        return User::create([
+//            'name' => $data['name'],
+//            'email' => $data['email'],
+//            'password' => Hash::make($data['password']),
+//        ]);
+//    }
 
-    // Register
-    public function showRegistrationForm()
-    {
-        $pageConfigs = ['bodyCustomClass' => 'register-bg', 'isCustomizer' => false];
 
-        return view('/auth/register', [
-            'pageConfigs' => $pageConfigs
-        ]);
-    }
 }

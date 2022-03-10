@@ -99,11 +99,11 @@
                             @csrf
                             <div class="row">
                                 <div class="input-field col m6 s12">
-                                    <input id="name" name="name" type="text" class="validate" value="@if(auth()->user()){{ Auth::user()->name }} @endif">
+                                    <input id="name" name="name" type="text" class="" value="@if(auth()->user()){{ Auth::user()->name }} @endif">
                                     <label for="name">Your Name</label>
                                 </div>
                                 <div class="input-field col m6 s12">
-                                    <input id="email" name="email" type="text" class="validate" value="@if(auth()->user()){{ Auth::user()->email }} @endif">
+                                    <input id="email" name="email" type="text" class="" value="@if(auth()->user()){{ Auth::user()->email }} @endif">
                                     <label for="email">Your e-mail</label>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                                     <label for="phone-demo">Phone</label>
                                 </div>
                                 <div class="input-field col s12 width-100">
-                                    <textarea id="message" name="message" class="materialize-textarea"></textarea>
+                                    <textarea id="message" name="message"  class="materialize-textarea"></textarea>
                                     <label for="message">Your message</label>
                                     <button class="waves-effect waves-light btn" type="submit">Send</button>
                                 </div>
@@ -126,10 +126,16 @@
     </div>
 @endsection
 
+{{-- vendor script --}}
+@section('vendor-script')
+    <script src="{{asset('vendors/formatter/jquery.formatter.min.js')}}"></script>
+@endsection
+
+
 {{-- page script --}}
 @section('page-script')
     <script src="{{asset('js/scripts/page-contact.js')}}"></script>
     <script src="{{asset('js/scripts/form-masks.js')}}"></script>
     <script src="{{asset('js/scripts/ui-alerts.js')}}"></script>
-
+    <script src="{{asset('js/scripts/form-elements.js')}}"></script>
 @endsection

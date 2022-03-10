@@ -8,6 +8,14 @@
       "icon": "check",
       "slug": "app-todo"
     },
+    {
+      "url": "referral",
+      "name": "referral",
+      "i18n": "ToDo",
+      "class": "waves-effect waves-cyan",
+      "icon": "chat_bubble_outline",
+      "slug": "app-todo"
+    },
 
     {
       "navheader": "Search",
