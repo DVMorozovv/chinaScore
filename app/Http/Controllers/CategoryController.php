@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class CategoryController extends Controller
 {
     static $key = 'b51a8024-ebac-49cb-885e-07670065e482';
-
+    const KEY = 'b51a8024-ebac-49cb-885e-07670065e482';
     public static function curl_json($url){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

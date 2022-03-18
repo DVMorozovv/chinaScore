@@ -1,7 +1,7 @@
 /*----------------------------------------
-    Contact Page (Map-card)
+    Support Page (Map-card)
 ------------------------------------------*/
-/*---------------------------------------- 
+/*----------------------------------------
   Available Layout type names
 -----------------------------------------*/
 /*
@@ -13,7 +13,7 @@
 
 /* Need to change Layout name as per your requirement on below mentioned line.*/
 /*
-1. @import "../themes/vertical-gradient-menu-template/variables"; 
+1. @import "../themes/vertical-gradient-menu-template/variables";
 2. @import "../themes/vertical-gradient-menu-template/theme-variables";
 */
 .map-card .card .card-reveal .card-title, .map-card .card .card-content .card-title {
@@ -32,7 +32,7 @@
   top: -40px;
 }
 
-/* ---- Map Contact Page ----*/
+/* ---- Map Support Page ----*/
 #contact-page .btn-move-up {
   top: -40px;
 }

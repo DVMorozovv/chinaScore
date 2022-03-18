@@ -4,7 +4,7 @@
   <div class="footer-copyright">
     <div class="container">
       <span>&copy; 2022 <a href="http://themeforest.net/user/pixinvent/portfolio?ref=pixinvent"
-          target="_blank">ChinaScore</a> All rights reserved.
+          target="_blank">ChinaScore</a>
       </span>
 {{--      <span class="right hide-on-small-only">--}}
 {{--        Design and Developed by <a href="https://pixinvent.com/">PIXINVENT</a>--}}

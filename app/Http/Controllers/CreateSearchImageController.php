@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\File;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use Carbon\Carbon;
 
-class CreateFileController extends Controller
+class CreateSearchImageController extends Controller
 {
     public static function saveFile($filename){
         $user = Auth::user();
@@ -25,11 +23,44 @@ class CreateFileController extends Controller
         $file->save();
     }
 
+    public function imageItem($image, $frame_position, $frame_size){
 
-    public function create_table(Request $req,  $id ){
+        $url = 'http://otapi.net/service-json/BatchSearchItemsFrame?instanceKey='.CategoryController::KEY.'&language=&signature=&timestamp=&sessionId=&xmlParameters=%3CSearchItemsParameters%3E%0D%0A++%3CProvider%3EAlibaba1688%3C%2FProvider%3E%0D%0A++%3CImageUrl%3E'.$image.'%3C%2FImageUrl%3E%0D%0A%3C%2FSearchItemsParameters%3E%0D%0A&framePosition='.$frame_position.'&frameSize='.$frame_size.'&blockList=';
+        $data = CategoryController::curl_json($url);
+        $items = [];
+        $count = 0;
+        for($i = 0; $i<count($data['Result']['Items']['Items']['Content']); $i++){
+            $items[] = $data['Result']['Items']['Items']['Content'][$count];
+            $count++;
+        }
+        $total_count = $data['Result']['Items']['Items']['TotalCount'];
+        return ['items'=>$items, 'total_count'=>$total_count];
+    }
 
-        $title = $req->input('title');
+    public static function imageItemOrder($image, $frame_position, $frame_size, $order_by){
+        $url = 'http://otapi.net/service-json/BatchSearchItemsFrame?instanceKey='.CategoryController::KEY.'&language=&signature=&timestamp=&sessionId=&xmlParameters=%3CSearchItemsParameters%3E%0D%0A++%3CProvider%3EAlibaba1688%3C%2FProvider%3E%0D%0A++%3CImageUrl%3E'.$image.'%3C%2FImageUrl%3E%0D%0A%3COrderBy%3E'.$order_by.'%3C%2FOrderBy%3E%0D%0A%3C%2FSearchItemsParameters%3E%0D%0A&framePosition='.$frame_position.'&frameSize='.$frame_size.'&blockList=';
+        $data = CategoryController::curl_json($url);
+        $items = [];
+        $count = 0;
+        for($i = 0; $i<count($data['Result']['Items']['Items']['Content']); $i++){
+            $items[] = $data['Result']['Items']['Items']['Content'][$count];
+            $count++;
+        }
+        $total_count = $data['Result']['Items']['Items']['TotalCount'];
+        return ['items'=>$items, 'total_count'=>$total_count];
+    }
+
+
+    public function create_excel(Request $req){
+
+
+//        $url = 'http://otapi.net/service-json/BatchSearchItemsFrame?instanceKey='.CategoryController::KEY.'&language=&signature=&timestamp=&sessionId=&xmlParameters=%3CSearchItemsParameters%3E%0D%0A++%3CProvider%3EAlibaba1688%3C%2FProvider%3E%0D%0A++%3CImageUrl%3E'.$image.'%3C%2FImageUrl%3E%0D%0A%3COrderBy%3E'.$order_by.'%3C%2FOrderBy%3E%0D%0A%3C%2FSearchItemsParameters%3E%0D%0A&framePosition='.$frame_position.'&frameSize='.$frame_size.'&blockList=';
+
+
+        $image = $_GET['image'];
         $select = $_GET["filter"];
+        $image = $req->input('image');
+
         $frame_limit = 10;
 
         switch ($select){
@@ -60,12 +91,8 @@ class CreateFileController extends Controller
         $frame_position = 0;
         $frame_size = 200;
 
-        if ($title == ''){
-            $data = CategoryController::CategoryItems($id, $frame_position, $frame_size, $order_by);
-        }
-        else{
-            $data = CategoryController::SearchByName($id, $frame_position, $frame_size, $title, $order_by);
-        }
+        $data = self::imageItemOrder($image, $frame_position, $frame_size, $order_by);
+
 
         $items = $data['items'];
         $total_count = $data['total_count'];
@@ -74,8 +101,6 @@ class CreateFileController extends Controller
 
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setTitle('items');
-//        $sheet_img = $spreadsheet->createSheet();
-//        $sheet_img->setTitle('images');
 
         $sheet->setCellValue('A1', "Id item");
         $sheet->setCellValue('B1', "Title");
@@ -98,38 +123,27 @@ class CreateFileController extends Controller
         $sheet->setCellValue('S1', "IsDeliverable");
         $sheet->setCellValue('T1', "Rating");
 
-//        $writer = new Xlsx($spreadsheet);
-//        $writer->save("$file_path");
 
         $item_count = 0;
         $i =2; // номер строки в таблице
         while($item_count < $frame_limit){  //$item_count < $total_count
             set_time_limit(0);
-            if ($title == ''){
-                $data = CategoryController::CategoryItems($id, $frame_position, $frame_size, $order_by);
-            }
-            else{
-                $data = CategoryController::SearchByName($id, $frame_position, $frame_size, $title, $order_by);
-            }
+            $data = self::imageItemOrder($image, $frame_position, $frame_size, $order_by);
             $items = $data['items'];
 
-//            // чтение файла
-//            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-//            $reader->setLoadSheetsOnly($sheet, $sheet_img);
 
             foreach($items as $item){
                 $sheet->setCellValue('A'.$i,  $item['Id'] );
                 $sheet->setCellValue('B'.$i,  $item['Title'] );
                 $sheet->setCellValue('C'.$i,  $item['Price']['ConvertedPrice'] );
-
                 $sheet->setCellValue('D'.$i, $item['MainPictureUrl']);
-//                $sheet->getCell('D'.$i)->getHyperlink()->setUrl("sheet://'images'!A$i");
+
                 if(isset($item['VendorName'])){
-                   $sheet->setCellValue('E'.$i,  $item['VendorName'] );
+                    $sheet->setCellValue('E'.$i,  $item['VendorName'] );
                 }
                 else{$sheet->setCellValue('E'.$i,  '-' );}
                 if(isset($item['VendorScore'])){
-                   $sheet->setCellValue('F'.$i,  $item['VendorScore'] );
+                    $sheet->setCellValue('F'.$i,  $item['VendorScore'] );
                 }
                 else{$sheet->setCellValue('F'.$i,  '-' );}
                 if(isset($item['ExternalItemUrl'])){
@@ -197,8 +211,6 @@ class CreateFileController extends Controller
                 else{$sheet->setCellValue('T'.$i,  '-' );}
 
                 // ---------------------------------
-//                $sheet_img->setCellValue('B'.$i, $item['MainPictureUrl']);
-//                $sheet_img->setCellValue('A'.$i, $item['Id']);
                 $i++;
             }
 

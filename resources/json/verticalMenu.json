@@ -16,6 +16,14 @@
       "icon": "chat_bubble_outline",
       "slug": "app-todo"
     },
+    {
+      "url": "learning",
+      "name": "learning",
+      "i18n": "ToDo",
+      "class": "waves-effect waves-cyan",
+      "icon": "chat_bubble_outline",
+      "slug": "app-todo"
+    },
 
     {
       "navheader": "Search",

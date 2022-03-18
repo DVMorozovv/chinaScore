@@ -1,6 +1,9 @@
 <?php
 
-
+use App\Http\Controllers\Admin\SupportCrudController;
+use App\Http\Controllers\Admin\TariffCrudController;
+use App\Http\Controllers\Admin\UserCrudController;
+use App\Http\Controllers\CreateSearchImageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,14 +17,12 @@ use App\Http\Controllers\SearchTitleController;
 use App\Http\Controllers\ShowFileController;
 use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\ReferralController;
+use App\Http\Controllers\ImageSearchController;
+
 
 // Admin Controllers
 
 use App\Http\Controllers\Admin\AdminController;
-
-
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +43,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
-// 1688 routes
-
 Route::get('/cat', function () {
     return view('/pages/cat');
 });
@@ -52,41 +51,42 @@ Route::get('/items', function () {
     return view('pages/items');
 });
 
-Route::get('/categories', [CategoryController::class, 'categories'])->middleware('auth')->name('categories');
+Route::group(['middleware' => ['auth']], function () {
 
-Route::post('/search/{id}', [CategoryController::class, 'SearchItems_ByName'])->middleware('auth')->name('search_form');
+    Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
+    Route::post('/search/{id}', [CategoryController::class, 'SearchItems_ByName'])->name('search_form');
+    Route::get('/categories/{id}', [CategoryController::class, 'categories_child'])->name('categories_child');
+    Route::get('/items/{id}', [CategoryController::class, 'SearchItems_ByCategory'])->name('get_item_by_cat');
+    Route::get('/create/{id}', [CreateFileController::class, 'create_table'])->name('create');
+    Route::post('/items/search/{id}', [CategoryController::class, 'SearchItems_ByName'])->name('search_cat_form');
+    Route::get('/search-title', [SearchTitleController::class, 'SearchTitle'])->name('search-title');
 
-Route::get('/categories/{id}', [CategoryController::class, 'categories_child'])->middleware('auth')->name('categories_child');
+    Route::get('/search-photo', function () {return view('pages/search-photo');})->name('search-photo');
+    Route::post('/search-result', [ImageSearchController::class, 'imageSearch'])->name('searchPhotoForm');
+    Route::get('/dwnld', [CreateSearchImageController::class, 'create_excel'])->name('create-img');
 
-Route::get('/items/{id}', [CategoryController::class, 'SearchItems_ByCategory'])->middleware('auth')->name('get_item_by_cat');
+    Route::get('/profile-settings', function () {return view('pages/profile-settings');})->name('profile-settings');
+    Route::get('/learning', function () {return view('pages/learning');})->name('learning');
 
-Route::get('/create/{id}', [CreateFileController::class, 'create_table'])->middleware('auth')->name('create');
 
-Route::post('/items/search/{id}', [CategoryController::class, 'SearchItems_ByName'])->middleware('auth')->name('search_cat_form');
+    Route::get('/referral', [ReferralController::class, 'refer'])->name('referral');
+    Route::post('/profile-settings/RedactProfileForm', [EditProfileController::class, 'RedactProfileForm'])->name('RedactProfileForm');
+    Route::put('/edit_profile/updateUserPassword', [EditProfileController::class, 'updateUserPassword'])->name('updateUserPassword');
 
-Route::get('/search-title', [SearchTitleController::class, 'SearchTitle'])->middleware('auth')->name('search-title');
 
-Route::get('/search-photo', function ()
-    {return view('pages/search-photo');
-})->middleware('auth')->name('search-photo');
+    Route::get('/user-files', [ShowFileController::class, 'files'])->name('user-files');
+    Route::get('/user-files/download', [ShowFileController::class, 'download_file'])->name('download_file');
 
-Route::get('/profile-settings', function ()
-    {return view('pages/profile-settings');
-})->middleware('auth')->name('profile-settings');
+    Route::get('/support', function () {return view('pages/support');})->name('support');
+    Route::post('/support/send', [SupportController::class, 'SupportForm'])->name('contactForm');
 
-Route::get('/referral', [ReferralController::class, 'refer'])->middleware('auth')->name('referral');
-
-Route::post('/profile-settings/edit', [EditProfileController::class, 'RedactProfileForm'])->middleware('auth')->name('RedactProfileForm');
-
-Route::get('/user-files', [ShowFileController::class, 'files'])->middleware('auth')->name('user-files');
-
-Route::get('/user-files/download',  [ShowFileController::class, 'download_file'])->middleware('auth')->name('download_file');
-
-Route::get('/support', function () {return view('pages/support');})->name('support');
-
-Route::post('/support/send', [SupportController::class, 'SupportForm'])->name('contactForm');
+});
 
 
 Route::group(['middleware' => ['role:admin', 'auth'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index']);
+    Route::resource('tariffs', TariffCrudController::class);
+    Route::resource('user', UserCrudController::class);
+    Route::resource('support', SupportCrudController::class);
+
 });

@@ -1,5 +1,5 @@
 /*
- * Contact Page
+ * Support Page
  */
 
 // Sidenav
