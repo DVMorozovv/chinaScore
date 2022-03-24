@@ -106,7 +106,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Продолжить</button>
+{{--        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Продолжить</button>--}}
       </div>
     </div>
   </div>

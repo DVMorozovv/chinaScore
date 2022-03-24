@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tariff;
+use App\Models\Article;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use function view;
 
-class TariffCrudController extends Controller
+class ArticleCrudController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +18,9 @@ class TariffCrudController extends Controller
      */
     public function index()
     {
-        $tariffs = Tariff::all();
+        $articles = Article::all();
 
-        return view('admin.tarif.index', ['tariffs' => $tariffs]);
+        return view('admin.article.index', ['articles' => $articles]);
     }
 
     /**
@@ -27,7 +29,7 @@ class TariffCrudController extends Controller
      */
     public function create()
     {
-        return view('admin.tarif.create');
+        return view('admin.article.create');
     }
 
     /**
@@ -40,33 +42,37 @@ class TariffCrudController extends Controller
     {
         try {
 
-            $new_tarif = new Tariff();
+            $new_article = new Article();
 
-            $new_tarif->name = $request->name;
-            $new_tarif->description = $request->description;
-            $new_tarif->price = $request->price;
-            $new_tarif->limit = $request->limit;
-            $new_tarif->duration = $request->duration;
+            $new_article->heading = $request->heading;
+            $new_article->content = $request->text;
+            $new_article->link = $request->link;
 
-            $new_tarif->save();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                Storage::putFile('public/images/articles', $file);
+            }
 
-            return Redirect::back()->withSuccess('Тариф был успешно добавлен');
+            $file_name = $file->hashName();
+            $new_article->image = $file_name;
+            $new_article->save();
+
+            return Redirect::back()->withSuccess('Статья был успешно добавлена');
 
         } catch (QueryException $e){
 
             return Redirect::back()->withErrors('Что-то пошло не так, попробуйте еще раз');
 
         }
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tariff  $tariff
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Tariff $tariff)
+    public function show(Article $article)
     {
         //
     }
@@ -74,31 +80,38 @@ class TariffCrudController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tariff  $tariff
+     * @param  \App\Models\Article  $article
      */
-    public function edit(Tariff $tariff)
+    public function edit(Article $article)
     {
-        return view('admin.tarif.edit', ['tariff'=>$tariff]);
+        return view('admin.article.edit', ['article'=>$article]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tariff  $tariff
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Tariff $tariff)
+    public function update(Request $request, Article $article)
     {
         try {
 
-            $tariff->name = $request->name;
-            $tariff->description = $request->description;
-            $tariff->price = $request->price;
-            $tariff->limit = $request->limit;
-            $tariff->duration = $request->duration;
+            $article->heading = $request->heading;
+            $article->content = $request->text;
+            $article->link = $request->link;
 
-            $tariff->save();
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                Storage::putFile('public/images/articles', $file);
+
+                $file_name = $file->hashName();
+                $article->image = $file_name;
+            }
+
+//            dd($request);
+            $article->save();
 
             return Redirect::back()->withSuccess('Тариф был успешно изменен');
 
@@ -111,14 +124,14 @@ class TariffCrudController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tariff  $tariff
+     * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Tariff $tariff)
+    public function destroy(Article $article)
     {
         try {
 
-            $tariff->delete();
+            $article->delete();
 
             return redirect()->back()->withSuccess("Тариф был успешно удален");
 

@@ -25,7 +25,7 @@
     <div class="mt-2 title_bg mb-2">
         <div class="container "><h3 class="home_title">Поиск по картинке</h3></div>
     </div>
-    @dump($image, $total_count, $items)
+{{--    @dump($image, $total_count, $items)--}}
     <div class="container">
 
         @for($i = 0; $i < count($items); $i++)
@@ -42,7 +42,6 @@
 
         <div class="row valign-wrapper mb-2">
             <div class="col s12 m8 l6"><h6>Найдено товаров: {{ $total_count }}</h6></div>
-        <!-- <div class="col-3"><h4>id:{{-- {{ $id }} --}}</h4></div> -->
             <div class="col s12 m4 l6 center">
                 <a class="waves-effect waves-light btn modal-trigger btn_min_width gradient-45deg-purple-deep-orange"  href="#modal2"><i class="material-icons right">file_download</i>Скачать</a>
             </div>
@@ -79,9 +78,8 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Продолжить</button>
-                </div>
+{{--                <div class="modal-footer">--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>

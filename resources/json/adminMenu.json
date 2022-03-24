@@ -49,6 +49,28 @@
             "class": "waves-effect waves-cyan",
             "icon": "chat_bubble_outline",
             "slug": "app-todo"
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Learning",
+            "i18n": "ToDo",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "icon": "chat_bubble_outline",
+            "slug": "app-todo",
+            "submenu": [
+                {
+                    "url": "admin/articles",
+                    "name": "Show",
+                    "i18n": "Modern",
+                    "slug": "dashboard-modern"
+                },
+                {
+                    "url": "admin/articles/create",
+                    "name": "Create",
+                    "i18n": "Modern",
+                    "slug": "dashboard-modern"
+                }
+            ]
         }
     ]
 }

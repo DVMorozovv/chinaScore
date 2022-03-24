@@ -5,7 +5,7 @@
       "name": "Home",
       "i18n": "ToDo",
       "class": "waves-effect waves-cyan",
-      "icon": "check",
+      "icon": "home",
       "slug": "app-todo"
     },
     {
@@ -13,7 +13,7 @@
       "name": "referral",
       "i18n": "ToDo",
       "class": "waves-effect waves-cyan",
-      "icon": "chat_bubble_outline",
+      "icon": "people_outline",
       "slug": "app-todo"
     },
     {
@@ -34,7 +34,7 @@
       "name": "Categories",
       "i18n": "Chat",
       "class": "waves-effect waves-cyan",
-      "icon": "chat_bubble_outline",
+      "icon": "format_list_bulleted",
       "slug": "app-chat"
     },
     {
@@ -42,7 +42,7 @@
       "name": "Title",
       "i18n": "Chat",
       "class": "waves-effect waves-cyan",
-      "icon": "chat_bubble_outline",
+      "icon": "search",
       "slug": "app-chat"
     },
     {
@@ -50,7 +50,7 @@
       "name": "Photo",
       "i18n": "Chat",
       "class": "waves-effect waves-cyan",
-      "icon": "chat_bubble_outline",
+      "icon": "photo",
       "slug": "app-chat"
     },
     {
@@ -62,7 +62,7 @@
       "name": "User",
       "i18n": "Chat",
       "class": "waves-effect waves-cyan",
-      "icon": "chat_bubble_outline",
+      "icon": "person_add",
       "slug": "app-chat"
     },
     {
@@ -70,7 +70,7 @@
       "name": "Money",
       "i18n": "Chat",
       "class": "waves-effect waves-cyan",
-      "icon": "chat_bubble_outline",
+      "icon": "payment",
       "slug": "app-chat"
     },
     {
@@ -78,7 +78,7 @@
       "name": "Files",
       "i18n": "Chat",
       "class": "waves-effect waves-cyan",
-      "icon": "chat_bubble_outline",
+      "icon": "folder_open",
       "slug": "app-chat"
     },
     {
@@ -90,7 +90,7 @@
       "name": "Support",
       "i18n": "Chat",
       "class": "waves-effect waves-cyan",
-      "icon": "chat_bubble_outline",
+      "icon": "import_contacts",
       "slug": "app-chat"
     }
   ]

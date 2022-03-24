@@ -19,8 +19,6 @@
 {{-- page styles --}}
 @section('page-style')
     <link rel="stylesheet" type="text/css" href="{{asset('css/pages/data-tables.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/pages/app-sidebar.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/pages/app-contacts.css')}}">
 @endsection
 
 {{-- page content --}}
@@ -45,28 +43,22 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Message</th>
-                                        <th>Created at</th>
+                                        <th>Created_at</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($supports as $support)
+                                    @foreach($articles as $article)
                                         <tr>
-                                            <td>{{ $support->id }}</td>
-                                            <td>{{ $support->name }}</td>
-                                            <td>{{ $support->email }}</td>
-                                            <td>{{ $support->phone }}</td>
-                                            <td>{{ $support->message }}</td>
-                                            <td>{{ $support->created_at }}</td>
+                                            <td>{{ $article->id }}</td>
+                                            <td>{{ $article->heading }}</td>
+                                            <td>{{ $article->created_at }}</td>
                                             <td>
                                                 <div class="invoice-action display-flex">
-{{--                                                    <a href="{{ route('support.edit', $support['id']) }}" class="invoice-action-view mr-4">--}}
-{{--                                                        <i class="material-icons">edit</i>--}}
-{{--                                                    </a>--}}
-                                                    <form action="{{ route('support.destroy', $support['id']) }}" method="post" name="form">
+                                                    <a href="{{ route('articles.edit', $article['id']) }}" class="invoice-action-view mr-4">
+                                                        <i class="material-icons">edit</i>
+                                                    </a>
+                                                    <form action="{{ route('articles.destroy', $article['id']) }}" method="post" name="form">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" style="

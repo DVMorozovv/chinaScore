@@ -20,7 +20,7 @@ class UserCrudController extends Controller
     {
         $users = User::all();
 
-        return view('Admin.user.index', ['users' => $users]);
+        return view('admin.user.index', ['users' => $users]);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserCrudController extends Controller
      */
     public function create()
     {
-        return view('Admin.user.create');
+        return view('admin.user.create');
     }
 
     /**

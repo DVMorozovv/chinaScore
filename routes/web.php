@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\SupportCrudController;
-use App\Http\Controllers\Admin\TariffCrudController;
-use App\Http\Controllers\Admin\UserCrudController;
-use App\Http\Controllers\CreateSearchImageController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,11 +15,17 @@ use App\Http\Controllers\ShowFileController;
 use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\ImageSearchController;
+use App\Http\Controllers\CreateSearchImageController;
+use App\Http\Controllers\ArticleController;
 
 
 // Admin Controllers
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\SupportCrudController;
+use App\Http\Controllers\Admin\TariffCrudController;
+use App\Http\Controllers\Admin\UserCrudController;
+use App\Http\Controllers\Admin\ArticleCrudController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,14 +68,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/search-result', [ImageSearchController::class, 'imageSearch'])->name('searchPhotoForm');
     Route::get('/dwnld', [CreateSearchImageController::class, 'create_excel'])->name('create-img');
 
-    Route::get('/profile-settings', function () {return view('pages/profile-settings');})->name('profile-settings');
-    Route::get('/learning', function () {return view('pages/learning');})->name('learning');
+
+    Route::get('/learning', [ArticleController::class, 'index'])->name('learning');
+    Route::get('/learning/{id}', [ArticleController::class, 'article'])->name('article');
 
 
     Route::get('/referral', [ReferralController::class, 'refer'])->name('referral');
+
+    Route::get('/profile-settings', function () {return view('pages/profile-settings');})->name('profile-settings');
     Route::post('/profile-settings/RedactProfileForm', [EditProfileController::class, 'RedactProfileForm'])->name('RedactProfileForm');
     Route::put('/edit_profile/updateUserPassword', [EditProfileController::class, 'updateUserPassword'])->name('updateUserPassword');
-
 
     Route::get('/user-files', [ShowFileController::class, 'files'])->name('user-files');
     Route::get('/user-files/download', [ShowFileController::class, 'download_file'])->name('download_file');
@@ -88,5 +93,6 @@ Route::group(['middleware' => ['role:admin', 'auth'], 'prefix' => 'admin'], func
     Route::resource('tariffs', TariffCrudController::class);
     Route::resource('user', UserCrudController::class);
     Route::resource('support', SupportCrudController::class);
+    Route::resource('articles', ArticleCrudController::class);
 
 });

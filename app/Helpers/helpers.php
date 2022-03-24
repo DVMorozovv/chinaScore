@@ -26,7 +26,7 @@ class Helper
             'templateTitle' => 'ChinaScore',
             'isCustomizer' => false,
             'defaultLanguage'=>'en',
-            'largeScreenLogo' => 'images/logo/materialize-logo-color.png',
+            'largeScreenLogo' => 'images/logo/materialize-logo.png',
             'smallScreenLogo' => 'images/logo/materialize-logo.png',
             'isFabButton'=>false,
             'direction' => env('MIX_CONTENT_DIRECTION', 'ltr'),

@@ -15,7 +15,6 @@
 
 {{-- page styles --}}
 @section('page-style')
-<link rel="stylesheet" type="text/css" href="{{asset('css/pages/app-sidebar.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/pages/app-email.css')}}">
 @endsection
 

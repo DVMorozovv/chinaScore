@@ -57,9 +57,8 @@ class CreateSearchImageController extends Controller
 //        $url = 'http://otapi.net/service-json/BatchSearchItemsFrame?instanceKey='.CategoryController::KEY.'&language=&signature=&timestamp=&sessionId=&xmlParameters=%3CSearchItemsParameters%3E%0D%0A++%3CProvider%3EAlibaba1688%3C%2FProvider%3E%0D%0A++%3CImageUrl%3E'.$image.'%3C%2FImageUrl%3E%0D%0A%3COrderBy%3E'.$order_by.'%3C%2FOrderBy%3E%0D%0A%3C%2FSearchItemsParameters%3E%0D%0A&framePosition='.$frame_position.'&frameSize='.$frame_size.'&blockList=';
 
 
-        $image = $_GET['image'];
-        $select = $_GET["filter"];
-        $image = $req->input('image');
+        $select = $req->filter;
+        $image = $req->image;
 
         $frame_limit = 10;
 
