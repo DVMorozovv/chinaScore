@@ -42,19 +42,25 @@ class ArticleCrudController extends Controller
     {
         try {
 
+            $validate = $request->validate([
+                'heading'=>'required|max:100',
+                'description' => 'required|max:400'
+            ]);
+
             $new_article = new Article();
 
-            $new_article->heading = $request->heading;
+            $new_article->heading = $validate['heading'];
+            $new_article->description = $validate['description'];
             $new_article->content = $request->text;
             $new_article->link = $request->link;
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 Storage::putFile('public/images/articles', $file);
+                $file_name = $file->hashName();
+                $new_article->image = $file_name;
             }
 
-            $file_name = $file->hashName();
-            $new_article->image = $file_name;
             $new_article->save();
 
             return Redirect::back()->withSuccess('Статья был успешно добавлена');
@@ -98,7 +104,12 @@ class ArticleCrudController extends Controller
     {
         try {
 
-            $article->heading = $request->heading;
+            $validate = $request->validate([
+                'heading'=>'required|max:100',
+                'description' => 'required|max:400'
+            ]);
+            $article->heading = $validate['heading'];
+            $article->description = $validate['description'];
             $article->content = $request->text;
             $article->link = $request->link;
 
@@ -110,7 +121,6 @@ class ArticleCrudController extends Controller
                 $article->image = $file_name;
             }
 
-//            dd($request);
             $article->save();
 
             return Redirect::back()->withSuccess('Тариф был успешно изменен');

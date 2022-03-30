@@ -72,7 +72,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/learning', [ArticleController::class, 'index'])->name('learning');
     Route::get('/learning/{id}', [ArticleController::class, 'article'])->name('article');
 
-
     Route::get('/referral', [ReferralController::class, 'refer'])->name('referral');
 
     Route::get('/profile-settings', function () {return view('pages/profile-settings');})->name('profile-settings');
@@ -84,6 +83,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/support', function () {return view('pages/support');})->name('support');
     Route::post('/support/send', [SupportController::class, 'SupportForm'])->name('contactForm');
+
+    Route::get('/tariffs', function (){return view('pages/tariff');})->name('tariff');
 
 });
 

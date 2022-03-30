@@ -34,6 +34,12 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
+                                    <input id="description" type="text" name="description" value="{{$article->description}}">
+                                    <label for="description">Description</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
                                     <textarea id="content" name="text" class="materialize-textarea">{{$article->content}}</textarea>
                                     <label for="content">Content</label>
                                 </div>
@@ -47,11 +53,16 @@
                             <div class="row">
                                 <div id="file-upload" class="section">
                                     <div class="row section">
-                                        <div class="col s12 m12 l12">
+                                        <div class="col s12 m12 l12 mb-1">
                                             <p>Image</p>
                                         </div>
-                                        <div class="col s12 m12 l12">
-                                            <input type="file" id="input-file-now" class="dropify" name="image" data-default-file=""/>
+                                        <div class="col s12 m12 l12 display-flex justify-content-between">
+                                            <div class="col s12 m12 l3">
+                                                <img src="/storage/images/articles/{{$article->image}}" height="196">
+                                            </div>
+                                            <div class="col s12 m12 l9">
+                                                <input type="file" id="input-file-now" class="dropify" name="image" data-default-file=""/>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

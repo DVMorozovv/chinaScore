@@ -34,6 +34,12 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
+                                    <input id="description" type="text" name="description">
+                                    <label for="description">Description</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
                                     <textarea id="content" name="text" class="materialize-textarea"></textarea>
                                     <label for="content">Content</label>
                                 </div>

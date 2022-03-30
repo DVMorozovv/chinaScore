@@ -9,6 +9,14 @@
       "slug": "app-todo"
     },
     {
+      "url": "tariffs",
+      "name": "tariff",
+      "i18n": "ToDo",
+      "class": "waves-effect waves-cyan",
+      "icon": "dashboard",
+      "slug": "app-todo"
+    },
+    {
       "url": "referral",
       "name": "referral",
       "i18n": "ToDo",
