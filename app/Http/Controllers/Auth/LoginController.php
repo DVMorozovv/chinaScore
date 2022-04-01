@@ -47,4 +47,9 @@ class LoginController extends Controller
             'pageConfigs' => $pageConfigs
         ]);
     }
+
+    public function username()
+    {
+        return 'phone';
+    }
 }

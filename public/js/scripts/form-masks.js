@@ -31,6 +31,10 @@ $(function () {
     'pattern': '({{999}}) {{999}}-{{9999}}',
     'persistent': true
   });
+  $('#phone').formatter({
+      'pattern': '({{999}}) {{999}}-{{9999}}',
+      'persistent': true
+  });
   $('#phone-code').formatter({
     'pattern': '+91 {{999}}-{{999}}-{{999}}-{{9999}}',
     'persistent': true

@@ -58,7 +58,7 @@
                                             <td>{{ $support->name }}</td>
                                             <td>{{ $support->email }}</td>
                                             <td>{{ $support->phone }}</td>
-                                            <td>{{ $support->message }}</td>
+                                            <td style="white-space: pre-line">{{ $support->message }}</td>
                                             <td>{{ $support->created_at }}</td>
                                             <td>
                                                 <div class="invoice-action display-flex">

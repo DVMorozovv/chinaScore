@@ -34,7 +34,13 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <input id="email" type="text" name="email" value="{{$user->email}}">
-                                    <label for="email">Price</label>
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="phone" type="text" name="phone" value="{{$user->phone}}">
+                                    <label for="phone">Phone</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -59,11 +65,16 @@
 
 @endsection
 
-{{-- vendor scripts --}}
+{{-- vendor script --}}
 @section('vendor-script')
-
+    <script src="{{asset('vendors/formatter/jquery.formatter.min.js')}}"></script>
 @endsection
 
-{{-- page scripts --}}
+
+{{-- page script --}}
 @section('page-script')
+    <script src="{{asset('js/scripts/page-contact.js')}}"></script>
+    <script src="{{asset('js/scripts/form-masks.js')}}"></script>
+    <script src="{{asset('js/scripts/ui-alerts.js')}}"></script>
+    <script src="{{asset('js/scripts/form-elements.js')}}"></script>
 @endsection

@@ -39,20 +39,24 @@ use App\Http\Controllers\Admin\ArticleCrudController;
 */
 
 Route::get('/', function () {
-    return view('/pages/home');
+    return view('/pages/lending');
 });
+
+Route::get('/login', function () {
+    return view('pages/login');
+})->name('login');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('home');
 
-Route::get('/cat', function () {
-    return view('/pages/cat');
-});
-
-Route::get('/items', function () {
-    return view('pages/items');
-});
+//Route::get('/cat', function () {
+//    return view('/pages/cat');
+//});
+//
+//Route::get('/items', function () {
+//    return view('pages/items');
+//});
 
 Route::group(['middleware' => ['auth']], function () {
 

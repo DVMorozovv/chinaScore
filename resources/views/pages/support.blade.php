@@ -109,7 +109,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col m12 s12">
-                                    <input id="phone-demo" name="phone-demo" type="text" class=""  value="{{ old('phone-demo') }}">
+                                    <input id="phone-demo" name="phone-demo" type="text" class=""  value="@if(auth()->user()){{ Auth::user()->phone }} @endif">
                                     <label for="phone-demo">Phone</label>
                                 </div>
                                 <div class="input-field col s12 width-100">

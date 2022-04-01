@@ -17,8 +17,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::insert([
-            'name' => 'test',
-            'email' => 'test@user.com',
+            'name' => 'admin',
+            'phone' => '(111) 111-1111',
+            'email' => 'admin@admin.com',
             'email_verified_at' => date('Y-m-d H:i:s'),
             'password' => bcrypt('12345678'),
             'created_at'  => date('Y-m-d H:i:s'),
@@ -37,7 +38,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('roles')->insert([
             'name' => 'user',
-            'guard_name' => 'web1',
+            'guard_name' => 'web',
         ]);
         DB::table('roles')->insert([
             'name' => 'admin',

@@ -52,21 +52,27 @@
                                 <div class="col s12">
                                     <div class="input-field">
                                         <label for="uname">Username</label>
-                                        <input type="text" id="name" name="name" readonly value="{{ Auth::user()->name }}">
+                                        <input type="text" id="name" name="name"  value="{{ Auth::user()->name }}">
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="input-field">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" id="phone" name="phone"  value="{{ Auth::user()->phone }}">
                                     </div>
                                 </div>
                                 <div class="col s12">
                                     <div class="input-field">
                                         <label for="email">E-mail</label>
-                                        <input id="email" type="email" name="email" readonly value="{{ Auth::user()->email }}">
+                                        <input id="email" type="email" name="email"  value="{{ Auth::user()->email }}">
                                     </div>
                                 </div>
-{{--                                <div class="col s12 display-flex justify-content-end form-action">--}}
-{{--                                    <button type="submit" class="btn indigo waves-effect waves-light mr-2">--}}
-{{--                                        Save changes--}}
-{{--                                    </button>--}}
+                                <div class="col s12 display-flex justify-content-end form-action">
+                                    <button type="submit" class="btn indigo waves-effect waves-light mr-2">
+                                        Save changes
+                                    </button>
 {{--                                    <button type="button" class="btn btn-light-pink waves-effect waves-light mb-1">Cancel</button>--}}
-{{--                                </div>--}}
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -113,9 +119,11 @@
 @section('vendor-script')
     <script src="{{asset('vendors/select2/select2.full.min.js')}}"></script>
     <script src="{{asset('vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('vendors/formatter/jquery.formatter.min.js')}}"></script>
 @endsection
 
 {{-- page script --}}
 @section('page-script')
     <script src="{{asset('js/scripts/page-account-settings.js')}}"></script>
+    <script src="{{asset('js/scripts/form-masks.js')}}"></script>
 @endsection

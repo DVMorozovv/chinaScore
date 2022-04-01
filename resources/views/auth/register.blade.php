@@ -20,6 +20,7 @@
           <h5 class="ml-4">Регистрация</h5>
         </div>
       </div>
+
       <div class="row margin">
         <div class="input-field col s12">
           <i class="material-icons prefix pt-2">person_outline</i>
@@ -33,11 +34,26 @@
           @enderror
         </div>
       </div>
+
+        <div class="row margin">
+            <div class="input-field col s12">
+                <i class="material-icons prefix pt-2">phone</i>
+                <input id="phone" type="text" class="@error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}"
+                       autocomplete="phone">
+                <label for="phone" class="center-align">Телефон</label>
+                @error('phone')
+                <small class="red-text ml-7" role="alert">
+                    {{ $message }}
+                </small>
+                @enderror
+            </div>
+        </div>
+
       <div class="row margin">
         <div class="input-field col s12">
           <i class="material-icons prefix pt-2">mail_outline</i>
           <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email"
-            value="{{ old('email') }}"  autocomplete="email">
+            value="{{ old('email') }}">
           <label for="email">Email</label>
           @error('email')
           <small class="red-text ml-7" role="alert">
@@ -46,6 +62,7 @@
           @enderror
         </div>
       </div>
+
       <div class="row margin">
         <div class="input-field col s12">
           <i class="material-icons prefix pt-2">lock_outline</i>
@@ -81,4 +98,18 @@
     </form>
   </div>
 </div>
+@endsection
+
+{{-- vendor script --}}
+@section('vendor-script')
+    <script src="{{asset('vendors/formatter/jquery.formatter.min.js')}}"></script>
+@endsection
+
+
+{{-- page script --}}
+@section('page-script')
+    <script src="{{asset('js/scripts/page-contact.js')}}"></script>
+    <script src="{{asset('js/scripts/form-masks.js')}}"></script>
+    <script src="{{asset('js/scripts/ui-alerts.js')}}"></script>
+    <script src="{{asset('js/scripts/form-elements.js')}}"></script>
 @endsection

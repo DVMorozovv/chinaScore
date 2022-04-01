@@ -16,12 +16,14 @@ class EditProfileController extends Controller
 
         $validate = $req->validate([
             'name' => 'required|min:1|max:100',
+            'phone' => 'required|min:8|max:100|unique:users,phone,'.$user->id,
             'email' => 'required|email|unique:users,email,'.$user->id
         ]);
         $name = $validate['name'];
+        $phone = $validate['phone'];
         $email = $validate['email'];
 
-        User::select()->find($user_id)->update(array('email' => $email, 'name' => $name));
+        User::select()->find($user_id)->update(array('email' => $email, 'name' => $name, 'phone' => $phone));
 
         return redirect()->back()->withSuccess('Информация обновлена');
     }
