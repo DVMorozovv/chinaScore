@@ -17,6 +17,7 @@ use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\ImageSearchController;
 use App\Http\Controllers\CreateSearchImageController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\TariffController;
 
 
 // Admin Controllers
@@ -50,14 +51,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('home');
 
-//Route::get('/cat', function () {
-//    return view('/pages/cat');
-//});
-//
-//Route::get('/items', function () {
-//    return view('pages/items');
-//});
-
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
@@ -71,7 +64,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/search-photo', function () {return view('pages/search-photo');})->name('search-photo');
     Route::post('/search-result', [ImageSearchController::class, 'imageSearch'])->name('searchPhotoForm');
     Route::get('/dwnld', [CreateSearchImageController::class, 'create_excel'])->name('create-img');
-
 
     Route::get('/learning', [ArticleController::class, 'index'])->name('learning');
     Route::get('/learning/{id}', [ArticleController::class, 'article'])->name('article');
@@ -88,10 +80,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/support', function () {return view('pages/support');})->name('support');
     Route::post('/support/send', [SupportController::class, 'SupportForm'])->name('contactForm');
 
-    Route::get('/tariffs', function (){return view('pages/tariff');})->name('tariff');
+    Route::get('/tariffs', [TariffController::class, 'index'])->name('tariff');
 
 });
-
 
 Route::group(['middleware' => ['role:admin', 'auth'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index']);
