@@ -192,7 +192,168 @@
             if (creatium.screen === 'lg' && creatium.device !== 'other') creatium.device_fix = true;
             if (creatium.device_fix) document.write('<script src="' + creatium.async.js_adaptive_sections + '"></scr'+'ipt>');
         }
-    </script><div class="node section-clear section font-text-ttnormsregular font-header-ttnormsmedium css1" data-common="ul13keajf62he1rvxmn9"><div class="padding_top"></div><div class="container"><div class="cont"><div class="node widget-grid widget xs-hidden sm-hidden css2"><div class="grid valign-middle paddings-20px xs-wrap"><div class="gridwrap"><div class="col" style="width: 33.3333%;"><div class="cont"><div class="node widget-imagedtext widget css2"><div class="tbl middle xs-force-center"><div class="td icon" style="width: 60px;"><div class="wrap"><img class="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHCAYAAAABIM1CAAAAAXNSR0IArs4c6QAAABZJREFUKFNjZKAQMFKon2HUAAbKwwAACOMACLkauxAAAAAASUVORK5CYII=" style="width: 60px; height: 28.2px;" data-lazy-image="https://i.1.creatium.io/98/76/36/5fe7c4fd04f391f7517ac47eba077be95d/materialize_logo_color.png#%7B%22size%22:%5B100,47%5D,%22quality%22:8%7D" data-lazy-image_resize="true" data-lazy-image_detect="css-width-height"></div></div><div class="td text"><div style="padding-left: 6px;"><div class="cont"></div><p class="textable css3" style="margin-bottom: 0px;">ChinaScore</p><div class="cont"></div></div></div></div></div></div></div><div class="col" style="width: 33.3333%;"><div class="cont"></div></div><div class="col" style="width: 33.3333%;"><div class="cont"><div class="node widget-button widget css2"><div class="button-container center"><div class="button-wrapper"><a class="btn btn-legacy font-text css4" data-action="link" data-highlight="true" data-track-active="false" href="{{route('login')}}" target="_self"><div class="pad-left" style="width: 24px;"></div><div class="btn-content"><span class="text">Вход / Регистрация</span></div><div class="pad-right" style="width: 24px;"></div></a></div></div></div></div></div></div></div></div></div></div><div class="padding_bottom"></div></div><div class="node section-clear section css5"><div class="padding_top"></div><div class="wrapper1" data-lazy-bgimage="https://i.1.creatium.io/8e/d0/c3/82138931a99f999dc760681d9b75b6fc47/kakie_byvayut_usloviya_postavki_tovara_i_chto_oni_oznachayut.jpg#%7B%22size%22:%5B800,450%5D,%22quality%22:8%7D" data-lazy-bgimage_resize="true"><div class="wrapper2"></div></div><div class="container"><div class="cont"><div class="node widget-text cr-text widget css6"><h1 class="textable css7">Поиск лучших товаров и <br>производителей в Китае</h1></div><div class="node widget-text cr-text widget css8"><p class="textable css9">ChinaScore позволяет экономить огромное количество времени при поиске товара, наш сервис позволит вам выбирать лучшие товары и поставщиков на сайте 1688.com, благодаря автоматизации процессов. Регистрируйтесь сейчас!</p></div><div class="node widget-button widget css10"><div class="button-container center"><div class="button-wrapper"><a class="btn btn-legacy font-text css11" data-action="link" data-highlight="true" data-track-active="false" href="{{route('login')}}" target="_self"><div class="pad-left" style="width: 24px;"></div><div class="btn-content"><span class="text">Вход / Регистрация</span></div><div class="pad-right" style="width: 24px;"></div></a></div></div></div></div></div><div class="padding_bottom"></div></div><div class="node section-clear section css12"><div class="padding_top"></div><div class="container"><div class="cont"><div class="node widget-grid widget xs-hidden sm-hidden css2"><div class="grid valign-middle paddings-20px xs-wrap"><div class="gridwrap"><div class="col" style="width: 29.0351%;"><div class="cont"><div class="node widget-imagedtext widget css2"><div class="tbl middle xs-force-center"><div class="td icon" style="width: 60px;"><div class="wrap"><img class="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHCAYAAAABIM1CAAAAAXNSR0IArs4c6QAAABZJREFUKFNjZKAQMFKon2HUAAbKwwAACOMACLkauxAAAAAASUVORK5CYII=" data-lazy-image="https://i.1.creatium.io/98/76/36/5fe7c4fd04f391f7517ac47eba077be95d/materialize_logo_color.png#%7B%22size%22:%5B100,47%5D,%22quality%22:8%7D" data-lazy-image_resize="true" data-lazy-image_detect="css-width-height" style="width: 60px; height: 28.2px;"></div></div><div class="td text"><div style="padding-left: 6px;"><div class="cont"></div><p class="textable css13" style="margin-bottom: 0px;">ChinaScore</p><div class="cont"></div></div></div></div></div></div></div><div class="col" style="width: 37.6316%;"><div class="cont"><div class="node widget-button widget css14"><div class="button-container center"><div class="button-wrapper"><a class="btn btn-legacy font-text css15" data-action="link" data-highlight="true" data-track-active="false" href="https://chinascore.ru/policy" target="_blank"><div class="pad-left" style="width: 12px;"></div><div class="btn-content"><span class="text">Политика конфиденциальности</span></div><div class="pad-right" style="width: 12px;"></div></a></div></div></div></div></div><div class="col" style="width: 33.3333%;"><div class="cont"><div class="node widget-button widget css2"><div class="button-container center"><div class="button-wrapper"><a class="btn btn-legacy font-text css4" data-action="link" data-highlight="true" data-track-active="false" href="{{route('login')}}" target="_self"><div class="pad-left" style="width: 24px;"></div><div class="btn-content"><span class="text">Вход / Регистрация</span></div><div class="pad-right" style="width: 24px;"></div></a></div></div></div></div></div></div></div></div></div></div><div class="padding_bottom"></div></div><div class="node section section-helper css16"></div>
+    </script>
+    <div class="node section-clear section font-text-ttnormsregular font-header-ttnormsmedium css1"
+         data-common="ul13keajf62he1rvxmn9">
+        <div class="padding_top"></div>
+        <div class="container">
+            <div class="cont">
+                <div class="node widget-grid widget xs-hidden sm-hidden css2">
+                    <div class="grid valign-middle paddings-20px xs-wrap">
+                        <div class="gridwrap">
+                            <div class="col" style="width: 33.3333%;">
+                                <div class="cont">
+                                    <div class="node widget-imagedtext widget css2">
+                                        <div class="tbl middle xs-force-center">
+                                            <div class="td icon" style="width: 60px;">
+                                                <div class="wrap"><img class=""
+                                                                       src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHCAYAAAABIM1CAAAAAXNSR0IArs4c6QAAABZJREFUKFNjZKAQMFKon2HUAAbKwwAACOMACLkauxAAAAAASUVORK5CYII="
+                                                                       style="width: 60px; height: 28.2px;"
+                                                                       data-lazy-image="https://i.1.creatium.io/98/76/36/5fe7c4fd04f391f7517ac47eba077be95d/materialize_logo_color.png#%7B%22size%22:%5B100,47%5D,%22quality%22:8%7D"
+                                                                       data-lazy-image_resize="true"
+                                                                       data-lazy-image_detect="css-width-height"></div>
+                                            </div>
+                                            <div class="td text">
+                                                <div style="padding-left: 6px;">
+                                                    <div class="cont"></div>
+                                                    <p class="textable css3" style="margin-bottom: 0px;">ChinaScore</p>
+                                                    <div class="cont"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col" style="width: 33.3333%;">
+                                <div class="cont"></div>
+                            </div>
+                            <div class="col" style="width: 33.3333%;">
+                                <div class="cont">
+                                    <div class="node widget-button widget css2">
+                                        <div class="button-container center">
+                                            <div class="button-wrapper"><a class="btn btn-legacy font-text css4"
+                                                                           data-action="link" data-highlight="true"
+                                                                           data-track-active="false"
+                                                                           href="{{route('login')}}" target="_self">
+                                                    <div class="pad-left" style="width: 24px;"></div>
+                                                    <div class="btn-content"><span
+                                                            class="text">Вход / Регистрация</span></div>
+                                                    <div class="pad-right" style="width: 24px;"></div>
+                                                </a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="padding_bottom"></div>
+    </div>
+    <div class="node section-clear section css5">
+        <div class="padding_top"></div>
+        <div class="wrapper1"
+             data-lazy-bgimage="https://i.1.creatium.io/8e/d0/c3/82138931a99f999dc760681d9b75b6fc47/kakie_byvayut_usloviya_postavki_tovara_i_chto_oni_oznachayut.jpg#%7B%22size%22:%5B800,450%5D,%22quality%22:8%7D"
+             data-lazy-bgimage_resize="true">
+            <div class="wrapper2"></div>
+        </div>
+        <div class="container">
+            <div class="cont">
+                <div class="node widget-text cr-text widget css6"><h1 class="textable css7">Поиск лучших товаров и <br>производителей
+                        в Китае</h1></div>
+                <div class="node widget-text cr-text widget css8"><p class="textable css9">ChinaScore позволяет
+                        экономить огромное количество времени при поиске товара, наш сервис позволит вам выбирать лучшие
+                        товары и поставщиков на сайте 1688.com, благодаря автоматизации процессов. Регистрируйтесь
+                        сейчас!</p></div>
+                <div class="node widget-button widget css10">
+                    <div class="button-container center">
+                        <div class="button-wrapper"><a class="btn btn-legacy font-text css11" data-action="link"
+                                                       data-highlight="true" data-track-active="false"
+                                                       href="{{route('login')}}" target="_self">
+                                <div class="pad-left" style="width: 24px;"></div>
+                                <div class="btn-content"><span class="text">Вход / Регистрация</span></div>
+                                <div class="pad-right" style="width: 24px;"></div>
+                            </a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="padding_bottom"></div>
+    </div>
+    <div class="node section-clear section css12">
+        <div class="padding_top"></div>
+        <div class="container">
+            <div class="cont">
+                <div class="node widget-grid widget xs-hidden sm-hidden css2">
+                    <div class="grid valign-middle paddings-20px xs-wrap">
+                        <div class="gridwrap">
+                            <div class="col" style="width: 29.0351%;">
+                                <div class="cont">
+                                    <div class="node widget-imagedtext widget css2">
+                                        <div class="tbl middle xs-force-center">
+                                            <div class="td icon" style="width: 60px;">
+                                                <div class="wrap"><img class=""
+                                                                       src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHCAYAAAABIM1CAAAAAXNSR0IArs4c6QAAABZJREFUKFNjZKAQMFKon2HUAAbKwwAACOMACLkauxAAAAAASUVORK5CYII="
+                                                                       data-lazy-image="https://i.1.creatium.io/98/76/36/5fe7c4fd04f391f7517ac47eba077be95d/materialize_logo_color.png#%7B%22size%22:%5B100,47%5D,%22quality%22:8%7D"
+                                                                       data-lazy-image_resize="true"
+                                                                       data-lazy-image_detect="css-width-height"
+                                                                       style="width: 60px; height: 28.2px;"></div>
+                                            </div>
+                                            <div class="td text">
+                                                <div style="padding-left: 6px;">
+                                                    <div class="cont"></div>
+                                                    <p class="textable css13" style="margin-bottom: 0px;">ChinaScore</p>
+                                                    <div class="cont"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col" style="width: 37.6316%;">
+                                <div class="cont">
+                                    <div class="node widget-button widget css14">
+                                        <div class="button-container center">
+                                            <div class="button-wrapper"><a class="btn btn-legacy font-text css15"
+                                                                           data-action="link" data-highlight="true"
+                                                                           data-track-active="false"
+                                                                           href="{{route('policy')}}"
+                                                                           target="_blank">
+                                                    <div class="pad-left" style="width: 12px;"></div>
+                                                    <div class="btn-content"><span class="text">Политика конфиденциальности</span>
+                                                    </div>
+                                                    <div class="pad-right" style="width: 12px;"></div>
+                                                </a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col" style="width: 33.3333%;">
+                                <div class="cont">
+                                    <div class="node widget-button widget css2">
+                                        <div class="button-container center">
+                                            <div class="button-wrapper"><a class="btn btn-legacy font-text css4"
+                                                                           data-action="link" data-highlight="true"
+                                                                           data-track-active="false"
+                                                                           href="{{route('login')}}" target="_self">
+                                                    <div class="pad-left" style="width: 24px;"></div>
+                                                    <div class="btn-content"><span
+                                                            class="text">Вход / Регистрация</span></div>
+                                                    <div class="pad-right" style="width: 24px;"></div>
+                                                </a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="padding_bottom"></div>
+    </div>
+    <div class="node section section-helper css16"></div>
 
 
     <!-- CORE -->

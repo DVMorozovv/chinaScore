@@ -47,6 +47,10 @@ Route::get('/login', function () {
     return view('pages/login');
 })->name('login');
 
+Route::get('/policy', function () {
+    return view('pages/policy');
+})->name('policy');
+
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('home');
