@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\SearchItemsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -8,13 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CreateFileController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\SearchTitleController;
 use App\Http\Controllers\ShowFileController;
 use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\ReferralController;
-use App\Http\Controllers\ImageSearchController;
 use App\Http\Controllers\CreateSearchImageController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TariffController;
@@ -50,6 +50,10 @@ Route::get('/login', function () {
 Route::get('/policy', function () {
     return view('pages/policy');
 })->name('policy');
+Route::get('/offer', function () {
+    return view('pages/offer');
+})->name('offer');
+
 
 Auth::routes();
 
@@ -57,16 +61,18 @@ Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->nam
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
-    Route::post('/search/{id}', [CategoryController::class, 'SearchItems_ByName'])->name('search_form');
-    Route::get('/categories/{id}', [CategoryController::class, 'categories_child'])->name('categories_child');
-    Route::get('/items/{id}', [CategoryController::class, 'SearchItems_ByCategory'])->name('get_item_by_cat');
+    Route::get('/categories', [CategoriesController::class, 'mainCategories'])->name('categories');//CategoriesController
+    Route::get('/categories/{id}', [CategoriesController::class, 'childCategories'])->name('categories_child');//CategoriesController
+
+    Route::post('/search/{id}', [SearchItemsController::class, 'itemsByName'])->name('search_form');//SearchItemsController
+    Route::get('/items/{id}', [SearchItemsController::class, 'itemsByCategory'])->name('get_item_by_cat');//SearchItemsController
+    Route::post('/items/search/{id}', [SearchItemsController::class, 'itemsByName'])->name('search_cat_form');//SearchItemsController
+
     Route::get('/create/{id}', [CreateFileController::class, 'create_table'])->name('create');
-    Route::post('/items/search/{id}', [CategoryController::class, 'SearchItems_ByName'])->name('search_cat_form');
     Route::get('/search-title', [SearchTitleController::class, 'SearchTitle'])->name('search-title');
 
     Route::get('/search-photo', function () {return view('pages/search-photo');})->name('search-photo');
-    Route::post('/search-result', [ImageSearchController::class, 'imageSearch'])->name('searchPhotoForm');
+    Route::post('/search-result', [SearchItemsController::class, 'itemsByImage'])->name('searchPhotoForm');
     Route::get('/dwnld', [CreateSearchImageController::class, 'create_excel'])->name('create-img');
 
     Route::get('/learning', [ArticleController::class, 'index'])->name('learning');

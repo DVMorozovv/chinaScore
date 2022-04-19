@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Services\FileService;
+use App\Services\SearchItemsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,51 +13,22 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class CreateSearchImageController extends Controller
 {
-    public static function saveFile($filename){
-        $user = Auth::user();
-        $user_id = $user->id;
-        $size = ShowFileController::filesize_format(filesize("files/"."$filename"));
-        $file = new File();
-        $file->name = "$filename";
-        $file->path = "files/"."$filename";
-        $file->user_id = "$user_id";
-        $file->size = "$size";
-        $file->save();
-    }
+    /**
+     * @var FileService
+     * @var SearchItemsService
+     */
+    private $fileService;
+    private $searchItemsService;
 
-    public function imageItem($image, $frame_position, $frame_size){
+    public function __construct(FileService $fileService, SearchItemsService $searchItemsService)
+    {
 
-        $url = 'http://otapi.net/service-json/BatchSearchItemsFrame?instanceKey='.CategoryController::KEY.'&language=&signature=&timestamp=&sessionId=&xmlParameters=%3CSearchItemsParameters%3E%0D%0A++%3CProvider%3EAlibaba1688%3C%2FProvider%3E%0D%0A++%3CImageUrl%3E'.$image.'%3C%2FImageUrl%3E%0D%0A%3C%2FSearchItemsParameters%3E%0D%0A&framePosition='.$frame_position.'&frameSize='.$frame_size.'&blockList=';
-        $data = CategoryController::curl_json($url);
-        $items = [];
-        $count = 0;
-        for($i = 0; $i<count($data['Result']['Items']['Items']['Content']); $i++){
-            $items[] = $data['Result']['Items']['Items']['Content'][$count];
-            $count++;
-        }
-        $total_count = $data['Result']['Items']['Items']['TotalCount'];
-        return ['items'=>$items, 'total_count'=>$total_count];
-    }
-
-    public static function imageItemOrder($image, $frame_position, $frame_size, $order_by){
-        $url = 'http://otapi.net/service-json/BatchSearchItemsFrame?instanceKey='.CategoryController::KEY.'&language=&signature=&timestamp=&sessionId=&xmlParameters=%3CSearchItemsParameters%3E%0D%0A++%3CProvider%3EAlibaba1688%3C%2FProvider%3E%0D%0A++%3CImageUrl%3E'.$image.'%3C%2FImageUrl%3E%0D%0A%3COrderBy%3E'.$order_by.'%3C%2FOrderBy%3E%0D%0A%3C%2FSearchItemsParameters%3E%0D%0A&framePosition='.$frame_position.'&frameSize='.$frame_size.'&blockList=';
-        $data = CategoryController::curl_json($url);
-        $items = [];
-        $count = 0;
-        for($i = 0; $i<count($data['Result']['Items']['Items']['Content']); $i++){
-            $items[] = $data['Result']['Items']['Items']['Content'][$count];
-            $count++;
-        }
-        $total_count = $data['Result']['Items']['Items']['TotalCount'];
-        return ['items'=>$items, 'total_count'=>$total_count];
+        $this->fileService = $fileService;
+        $this->searchItemsService = $searchItemsService;
     }
 
 
     public function create_excel(Request $req){
-
-
-//        $url = 'http://otapi.net/service-json/BatchSearchItemsFrame?instanceKey='.CategoryController::KEY.'&language=&signature=&timestamp=&sessionId=&xmlParameters=%3CSearchItemsParameters%3E%0D%0A++%3CProvider%3EAlibaba1688%3C%2FProvider%3E%0D%0A++%3CImageUrl%3E'.$image.'%3C%2FImageUrl%3E%0D%0A%3COrderBy%3E'.$order_by.'%3C%2FOrderBy%3E%0D%0A%3C%2FSearchItemsParameters%3E%0D%0A&framePosition='.$frame_position.'&frameSize='.$frame_size.'&blockList=';
-
 
         $select = $req->filter;
         $image = $req->image;
@@ -82,16 +55,14 @@ class CreateSearchImageController extends Controller
                 $order_by = '';
         }
 
-        $user = Auth::user();
-        $current = Carbon::now();
-        $file_name = $user->name.'_items-'.$current->toDateString().' '.$current->hour.'-'.$current->minute;
+        $file_name = $this->fileService->fileName();
         $file_path = 'files/'.$file_name.'.xlsx';
 
         $frame_position = 0;
         $frame_size = 200;
 
-        $data = self::imageItemOrder($image, $frame_position, $frame_size, $order_by);
 
+        $data = $this->searchItemsService->SearchItems_ByImage($image, $frame_position, $frame_size, $order_by);
 
         $items = $data['items'];
         $total_count = $data['total_count'];
@@ -127,9 +98,8 @@ class CreateSearchImageController extends Controller
         $i =2; // номер строки в таблице
         while($item_count < $frame_limit){  //$item_count < $total_count
             set_time_limit(0);
-            $data = self::imageItemOrder($image, $frame_position, $frame_size, $order_by);
+            $data = $this->searchItemsService->SearchItems_ByImage($image, $frame_position, $frame_size, $order_by);
             $items = $data['items'];
-
 
             foreach($items as $item){
                 $sheet->setCellValue('A'.$i,  $item['Id'] );
@@ -213,14 +183,14 @@ class CreateSearchImageController extends Controller
                 $i++;
             }
 
-            $item_count = $item_count + 200;
-            $frame_position = $frame_position + 200;
+            $item_count += 200;
+            $frame_position += 200;
             $items = [];
 
             $writer = new Xlsx($spreadsheet);
             $writer->save("$file_path");
         }
-        self::saveFile("$file_name".".xlsx");
+        $this->fileService->saveFile("$file_name".".xlsx");
         return response()->download(public_path("$file_path"));
     }
 }

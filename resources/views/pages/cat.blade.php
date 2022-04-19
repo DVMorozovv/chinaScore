@@ -45,18 +45,12 @@
     @endif
 
     @for($i = 0; $i < count($categories); $i++)
-        @if ( $categories[$i]['IsVirtual'] == true)
-        <div class="cat">
-            <h4><a class="btn btn-secondary btn-sm" href="{{ route ('categories_child', $categories[$i]['Id']) }}">{{ $categories[$i]['Name'] }}</a></h4>
-        </div>
-        @else
         <div class="row  mb-1">
             <div class="col s10 m11 l11"><a class="categorie_name a_color" href="{{ route ('categories_child', $categories[$i]['Id']) }}">{{ $categories[$i]['Name'] }}</a></div>
             <div class="col s2 m1 l1 center-align">
                 <a  href="{{ route ('get_item_by_cat', [ $categories[$i]['Id'], 'cat_name' => $categories[$i]['Name']] ) }}" class="waves-effect waves-light btn-floating gradient-45deg-purple-deep-orange"><i class="material-icons">file_download</i></a>
             </div>
         </div>
-        @endif
     @endfor
 </div>
 

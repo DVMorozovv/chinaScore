@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 
 use App\Models\File;
+use App\Services\DecodeJson;
+use App\Services\FileService;
+use App\Services\SearchItemsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,16 +16,19 @@ use Carbon\Carbon;
 
 class CreateFileController extends Controller
 {
-    public static function saveFile($filename){
-        $user = Auth::user();
-        $user_id = $user->id;
-        $size = ShowFileController::filesize_format(filesize("files/"."$filename"));
-        $file = new File();
-        $file->name = "$filename";
-        $file->path = "files/"."$filename";
-        $file->user_id = "$user_id";
-        $file->size = "$size";
-        $file->save();
+
+    /**
+     * @var FileService
+     * @var SearchItemsService
+     */
+    private $fileService;
+    private $searchItemsService;
+
+    public function __construct(FileService $fileService, SearchItemsService $searchItemsService)
+    {
+
+        $this->fileService = $fileService;
+        $this->searchItemsService = $searchItemsService;
     }
 
 
@@ -52,19 +58,17 @@ class CreateFileController extends Controller
                 $order_by = '';
         }
 
-        $user = Auth::user();
-        $current = Carbon::now();
-        $file_name = $user->name.'_items-'.$current->toDateString().' '.$current->hour.'-'.$current->minute;
+        $file_name = $this->fileService->fileName();
         $file_path = 'files/'.$file_name.'.xlsx';
 
         $frame_position = 0;
         $frame_size = 200;
 
         if ($title == ''){
-            $data = CategoryController::CategoryItems($id, $frame_position, $frame_size, $order_by);
+            $data = $this->searchItemsService->CategoryItems($id, $frame_position, $frame_size, $order_by);
         }
         else{
-            $data = CategoryController::SearchByName($id, $frame_position, $frame_size, $title, $order_by);
+            $data = $this->searchItemsService->SearchByName($id, $frame_position, $frame_size, $title, $order_by);
         }
 
         $items = $data['items'];
@@ -106,10 +110,10 @@ class CreateFileController extends Controller
         while($item_count < $frame_limit){  //$item_count < $total_count
             set_time_limit(0);
             if ($title == ''){
-                $data = CategoryController::CategoryItems($id, $frame_position, $frame_size, $order_by);
+                $data = $this->searchItemsService->CategoryItems($id, $frame_position, $frame_size, $order_by);
             }
             else{
-                $data = CategoryController::SearchByName($id, $frame_position, $frame_size, $title, $order_by);
+                $data = $this->searchItemsService->SearchByName($id, $frame_position, $frame_size, $title, $order_by);
             }
             $items = $data['items'];
 
@@ -202,14 +206,16 @@ class CreateFileController extends Controller
                 $i++;
             }
 
-            $item_count = $item_count + 200;
-            $frame_position = $frame_position + 200;
+            $item_count += 200;
+            $frame_position += 200;
             $items = [];
 
             $writer = new Xlsx($spreadsheet);
             $writer->save("$file_path");
         }
-        self::saveFile("$file_name".".xlsx");
+
+        $this->fileService->saveFile("$file_name".".xlsx");
+
         return response()->download(public_path("$file_path"));
     }
 }
