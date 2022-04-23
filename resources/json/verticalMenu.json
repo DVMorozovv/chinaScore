@@ -14,7 +14,9 @@
       "i18n": "ToDo",
       "class": "waves-effect waves-cyan",
       "icon": "dashboard",
-      "slug": "app-todo"
+      "slug": "app-todo",
+      "tariff": "30",
+      "tagcustom": " badge pill pink accent-2 float-right mr-2"
     },
     {
       "url": "referral",
@@ -74,7 +76,7 @@
       "slug": "app-chat"
     },
     {
-      "url": "home",
+      "url": "payments",
       "name": "Money",
       "i18n": "Chat",
       "class": "waves-effect waves-cyan",

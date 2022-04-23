@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Balance;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -114,6 +115,11 @@ class RegisterController extends Controller
         ]);
 
         $user->assignRole('user');
+
+        Balance::create([
+            'user_id' => $user->id,
+        ]);
+
         return $user;
     }
 

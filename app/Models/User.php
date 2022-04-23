@@ -52,19 +52,19 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-//    public function getProfitRef(int $typeId, int $level)
-//    {
-//
-//        $sumPayReferal = abs(HistoryPayment::select()
-//            ->where("user_id", "=", $this->id)
-//            ->where("type_id", "=", $typeId)
-//            ->sum("amount"));
-//
-//        $profit = $sumPayReferal*ReferalSystemConfig::getPercent($level);
-//
-//        return $profit;
-//
-//    }
+    public function getProfitRef($description, int $level)
+    {
+
+        $sumPayReferal = abs(Transaction::select()
+            ->where("user_id", "=", $this->id)
+            ->where("description", "=", $description)
+            ->sum("amount"));
+
+        $profit = $sumPayReferal*ReferalSystemConfig::getPercent($level);
+
+        return $profit;
+
+    }
 
     /**
      * The accessors to append to the model's array form.
@@ -97,7 +97,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getReferrer(){
         $user = User::select()
-            ->where("referrer_id", "=", $this->getAuthIdentifier())
+            ->where("id", "=", $this->referrer_id ) //"referrer_id", "=", $this->getAuthIdentifier()
             ->get();
 
         if (!$user->isEmpty()){

@@ -55,12 +55,11 @@ $(function () {
 
 	$('.btn-warning-confirm').click(function () {
 		swal({
-			title: "Are you sure?",
+			title: "Приобрести тариф?",
 			text: "You will not be able to recover this imaginary file!",
-			icon: 'warning',
+			icon: 'success',
 			buttons: {
-				cancel: true,
-				delete: 'Yes, Delete It'
+				delete: 'Приобрести'
 			}
 		})
 	});

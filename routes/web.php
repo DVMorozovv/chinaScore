@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SearchItemsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -91,8 +92,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/support/send', [SupportController::class, 'SupportForm'])->name('contactForm');
 
     Route::get('/tariffs', [TariffController::class, 'index'])->name('tariff');
+    Route::get('/tariffs/buy', [PaymentController::class, 'buyTariff'])->name('buyTariff');
+
+    Route::post('/payments/create', [PaymentController::class, 'create'])->name('payment.create');
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payment');
 
 });
+
+Route::match(['GET','POST'], '/payments/callback', [PaymentController::class, 'callback'])->name('payment.callback');
 
 Route::group(['middleware' => ['role:admin', 'auth'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index']);

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserTariffsTable extends Migration
+class CreateBalancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,11 @@ class CreateUserTariffsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_tariffs', function (Blueprint $table) {
+        Schema::create('balances', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-
-            $table->unsignedBigInteger('tariff_id');
-            $table->foreign('tariff_id')->references('id')->on('tariffs');
-
-            $table->unsignedBigInteger('payment_id');
-            $table->foreign('payment_id')->references('id')->on('history_payments');
-
-            $table->boolean('status')->default(false);
-            $table->integer('days_end_sub')->nullable();
-
+            $table->decimal('balance', 10, 2)->default(0);
             $table->timestamps();
         });
     }
@@ -39,6 +29,6 @@ class CreateUserTariffsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_tariffs');
+        Schema::dropIfExists('balances');
     }
 }

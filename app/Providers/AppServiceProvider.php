@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\Categories;
 use App\Services\DecodeJson;
 use App\Services\FileService;
+use App\Services\PaymentService;
 use App\Services\SearchItemsService;
 use Illuminate\Support\ServiceProvider;
 
@@ -37,6 +38,10 @@ class AppServiceProvider extends ServiceProvider
             $decodeJson = $this->app->make(DecodeJson::class);
 
             return new SearchItemsService($decodeJson);
+        });
+
+        $this->app->bind('App\Services\PaymentService', function ($app) {
+            return new PaymentService();
         });
     }
 

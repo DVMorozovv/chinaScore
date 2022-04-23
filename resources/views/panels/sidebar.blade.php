@@ -61,6 +61,11 @@
           @if(isset($menu->tag))
           <span class="{{$menu->tagcustom}}">{{$menu->tag}}</span>
           @endif
+          @if(isset($menu->tariff))
+            @if(\App\Models\UserTariff::getSubDay(Auth::user()->getAuthIdentifier()) > 0)
+              <span class="{{$menu->tagcustom}}">{{\App\Models\UserTariff::getSubDay(Auth::user()->getAuthIdentifier())}} дней</span>
+            @endif
+          @endif
         </a>
           @if(isset($menu->submenu))
           @include('panels.submenu', ['menu' => $menu->submenu])
