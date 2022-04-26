@@ -31,4 +31,16 @@ class UserTariff extends Model
 
         return $result;
     }
+
+    public static function getUserTariff(int $idUser){
+        $userTariff = UserTariff::select()->where('user_id', '=', $idUser)->where('status', '=', 1)->get()->first();
+        if(!empty($userTariff)){
+            $result = $userTariff;
+        }
+        else{
+            $result = null;
+        }
+
+        return $result;
+    }
 }

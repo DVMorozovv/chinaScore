@@ -36,7 +36,7 @@ class PaymentController extends Controller
 
     public function index(){
         $balance = Balance::getBalance(Auth::user()->getAuthIdentifier());
-        $transactions = Transaction::select()->where('user_id', '=', Auth::user()->getAuthIdentifier())->orderBy('id', 'asc')->get();
+        $transactions = Transaction::select()->where('user_id', '=', Auth::user()->getAuthIdentifier())->orderBy('id', 'desc')->get();
         return view('pages.payment-yoo', ['transactions'=>$transactions, 'balance' => $balance]);
     }
 
@@ -96,6 +96,7 @@ class PaymentController extends Controller
 
     }
 
+
     public function buyTariff(Request $req){
 
         $user_id = Auth::user()->getAuthIdentifier();
@@ -120,6 +121,7 @@ class PaymentController extends Controller
             $user_tariff = new UserTariff();
             $user_tariff->user_id = $user_id;
             $user_tariff->tariff_id = $tariff_id;
+            $user_tariff->payment_id = $transaction->id;
             $user_tariff->status = 1;
             $user_tariff->days_end_sub = $tariff->duration;
             $user_tariff->save();
@@ -128,40 +130,12 @@ class PaymentController extends Controller
 
             $referrerFirst = Auth::user()->getReferrer();
             if ($referrerFirst) {
-                $this->payReferrer($referrerFirst, Auth::user(), 1, $sum);
+                $this->paymentService->payReferrer($referrerFirst, Auth::user(), 1, $sum);
             }
 
             return redirect()->back()->withSuccess('Подписка успешно куплена');
         }else {
             return redirect()->back()->withSuccess('Ошибка');
-        }
-    }
-
-    public function payReferrer(User $referrer, User $referral, int $level, float $sum){
-        try {
-            if ($referrer) {
-                $percent = ReferalSystemConfig::getPercent($level);
-                $pofitReferrer = $sum * $percent;
-
-                $refer_transaction = new Transaction();
-                $refer_transaction->amount = $pofitReferrer;
-                $refer_transaction->description = PaymentTypeEnum::REFERRAL_INCOME;
-                $refer_transaction->status = PaymentStatusEnum::CONFIRMED;
-                $refer_transaction->user_id = $referrer->getAuthIdentifier();
-                $refer_transaction->save();
-
-                Balance::changeBalance($referrer->getAuthIdentifier(), $pofitReferrer);
-
-                $referalPayment = new ReferalPayment();
-                $referalPayment->payment_id = $refer_transaction->id;
-                $referalPayment->referal_id = $referral->id;
-                $referalPayment->save();
-
-                log::info('Создана запись выплаты рефереру', ['user' => $referrer->getAuthIdentifier(), 'sum' => $pofitReferrer]);
-            }
-        }
-        catch (QueryException $exception){
-            log::error('Ошибка выплаты рефереру', ['user' => $referrer->getAuthIdentifier(), 'exception'=>$exception->getMessage()]);
         }
     }
 

@@ -43,6 +43,22 @@
             "slug": "app-todo"
         },
         {
+            "url": "admin/userTariff",
+            "name": "Subscriptions",
+            "i18n": "ToDo",
+            "class": "waves-effect waves-cyan",
+            "icon": "chat_bubble_outline",
+            "slug": "app-todo"
+        },
+        {
+            "url": "admin/transaction",
+            "name": "Transactions",
+            "i18n": "ToDo",
+            "class": "waves-effect waves-cyan",
+            "icon": "chat_bubble_outline",
+            "slug": "app-todo"
+        },
+        {
             "url": "admin/support",
             "name": "Message",
             "i18n": "ToDo",

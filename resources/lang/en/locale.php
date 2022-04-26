@@ -19,6 +19,8 @@ return [
     "Users"=>"Пользователи",
     "Message"=>"Сообщения",
     "Learning"=>"Обучение",
-    "tariff"=>"Тарифы"
+    "tariff"=>"Тарифы",
+    "Transactions"=>"Транзакции",
+    "Subscriptions"=>"Подписки"
 ];
 ?>

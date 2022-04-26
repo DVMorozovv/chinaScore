@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Services\FileService;
+use App\Services\PaymentService;
 use App\Services\SearchItemsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,22 +17,43 @@ class CreateSearchImageController extends Controller
     /**
      * @var FileService
      * @var SearchItemsService
+     * @var PaymentService
      */
     private $fileService;
     private $searchItemsService;
+    private $paymentService;
 
-    public function __construct(FileService $fileService, SearchItemsService $searchItemsService)
+    public function __construct(FileService $fileService, SearchItemsService $searchItemsService, PaymentService $paymentService)
     {
 
         $this->fileService = $fileService;
         $this->searchItemsService = $searchItemsService;
+        $this->paymentService = $paymentService;
+    }
+
+    public function create_table(Request $req){
+
+        $image = $req->image;
+        $select = $req->select;
+        $isBuy = $req->isBuy;
+
+        $data = $this->create_excel($image, $select);
+        $this->paymentService->buyExcel();
+
+        $file_name = $data['file_name'];
+        $file_path = $data['file_path'];
+
+        if($isBuy == true){
+            return response()->download(public_path("$file_path"));
+        }
+
+        $this->fileService->saveFile("$file_name".".xlsx");
+        return response()->download(public_path("$file_path"));
+
     }
 
 
-    public function create_excel(Request $req){
-
-        $select = $req->filter;
-        $image = $req->image;
+    public function create_excel($image, $select){
 
         $frame_limit = 10;
 
@@ -190,7 +212,7 @@ class CreateSearchImageController extends Controller
             $writer = new Xlsx($spreadsheet);
             $writer->save("$file_path");
         }
-        $this->fileService->saveFile("$file_name".".xlsx");
-        return response()->download(public_path("$file_path"));
+        return ['file_name'=>$file_name, 'file_path'=>$file_path];
+
     }
 }

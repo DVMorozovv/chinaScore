@@ -8,4 +8,5 @@ class PaymentTypeEnum
     public const REFERRAL_INCOME = 'REFERRAL INCOME';
     public const OUTPUT = 'OUTPUT';
     public const BUY = 'BUY';
+    public const BUY_EXCEL = 'BUY_EXCEL';
 }

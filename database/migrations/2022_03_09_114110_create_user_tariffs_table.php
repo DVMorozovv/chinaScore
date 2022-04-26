@@ -23,10 +23,11 @@ class CreateUserTariffsTable extends Migration
             $table->foreign('tariff_id')->references('id')->on('tariffs');
 
             $table->unsignedBigInteger('payment_id');
-            $table->foreign('payment_id')->references('id')->on('history_payments');
+            $table->foreign('payment_id')->references('id')->on('transactions');
 
             $table->boolean('status')->default(false);
             $table->integer('days_end_sub')->nullable();
+            $table->integer('until_limit')->default(0);
 
             $table->timestamps();
         });

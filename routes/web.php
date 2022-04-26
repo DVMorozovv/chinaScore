@@ -1,9 +1,8 @@
 <?php
 
 
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\SearchItemsController;
+use App\Http\Controllers\Admin\SubscriptionCrudController;
+use App\Http\Controllers\Admin\UserTariffController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +18,9 @@ use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\CreateSearchImageController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TariffController;
-
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SearchItemsController;
 
 // Admin Controllers
 
@@ -28,6 +29,7 @@ use App\Http\Controllers\Admin\SupportCrudController;
 use App\Http\Controllers\Admin\TariffCrudController;
 use App\Http\Controllers\Admin\UserCrudController;
 use App\Http\Controllers\Admin\ArticleCrudController;
+use App\Http\Controllers\Admin\PaymentCrudController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,7 +76,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/search-photo', function () {return view('pages/search-photo');})->name('search-photo');
     Route::post('/search-result', [SearchItemsController::class, 'itemsByImage'])->name('searchPhotoForm');
-    Route::get('/dwnld', [CreateSearchImageController::class, 'create_excel'])->name('create-img');
+    Route::get('/dwnld', [CreateSearchImageController::class, 'create_table'])->name('create-img');
 
     Route::get('/learning', [ArticleController::class, 'index'])->name('learning');
     Route::get('/learning/{id}', [ArticleController::class, 'article'])->name('article');
@@ -101,10 +103,13 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::match(['GET','POST'], '/payments/callback', [PaymentController::class, 'callback'])->name('payment.callback');
 
+
 Route::group(['middleware' => ['role:admin', 'auth'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index']);
     Route::resource('tariffs', TariffCrudController::class);
     Route::resource('user', UserCrudController::class);
+    Route::resource('userTariff', SubscriptionCrudController::class);
+    Route::resource('transaction', PaymentCrudController::class);
     Route::resource('support', SupportCrudController::class);
     Route::resource('articles', ArticleCrudController::class);
 

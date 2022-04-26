@@ -28,13 +28,13 @@
                         <li class="tab">
                             <a href="#general">
                                 <i class="material-icons">brightness_low</i>
-                                <span>General</span>
+                                <span>Основные</span>
                             </a>
                         </li>
                         <li class="tab">
                             <a href="#change-password">
                                 <i class="material-icons">lock_open</i>
-                                <span>Change Password</span>
+                                <span>Поменять пароль</span>
                             </a>
                         </li>
                     </ul>
@@ -51,13 +51,13 @@
                             <div class="row">
                                 <div class="col s12">
                                     <div class="input-field">
-                                        <label for="uname">Username</label>
+                                        <label for="uname">Логин</label>
                                         <input type="text" id="name" name="name"  value="{{ Auth::user()->name }}">
                                     </div>
                                 </div>
                                 <div class="col s12">
                                     <div class="input-field">
-                                        <label for="phone">Phone</label>
+                                        <label for="phone">Телефон</label>
                                         <input type="text" id="phone" name="phone"  value="{{ Auth::user()->phone }}">
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="col s12 display-flex justify-content-end form-action">
                                     <button type="submit" class="btn indigo waves-effect waves-light mr-2">
-                                        Save changes
+                                        Сохранить
                                     </button>
 {{--                                    <button type="button" class="btn btn-light-pink waves-effect waves-light mb-1">Cancel</button>--}}
                                 </div>
@@ -87,23 +87,23 @@
                                 <div class="col s12">
                                     <div class="input-field">
                                         <input id="old_password" name="old_password" type="password">
-                                        <label for="old_password">Old Password</label>
+                                        <label for="old_password">Старый пароль</label>
                                     </div>
                                 </div>
                                 <div class="col s12">
                                     <div class="input-field">
                                         <input id="password" name="password" type="password">
-                                        <label for="password">New Password</label>
+                                        <label for="password">Новый пароль</label>
                                     </div>
                                 </div>
                                 <div class="col s12">
                                     <div class="input-field">
                                         <input id="password" type="password" name="password_confirmation">
-                                        <label for="password">Retype new Password</label>
+                                        <label for="password">Повторите новый пароль</label>
                                     </div>
                                 </div>
                                 <div class="col s12 display-flex justify-content-end form-action">
-                                    <button type="submit" class="btn indigo waves-effect waves-light mr-1">Save changes</button>
+                                    <button type="submit" class="btn indigo waves-effect waves-light mr-1">Сохранить</button>
                                 </div>
                             </div>
                         </form>
