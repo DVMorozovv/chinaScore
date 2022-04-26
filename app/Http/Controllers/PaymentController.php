@@ -75,8 +75,11 @@ class PaymentController extends Controller
     }
 
     public function create(Request $req){
-
-        $amount = $req->input('amount');
+        $validate = $req->validate([
+            'amount' => 'required|numeric|min:1'
+        ]);
+        $amount = $validate['amount'];
+//        $amount = $req->input('amount');
         $description = $req->input('description');
 
         $user_id = Auth::user()->getAuthIdentifier();

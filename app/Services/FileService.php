@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\File;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class FileService
 {
@@ -29,12 +30,12 @@ class FileService
     public function saveFile($filename){
         $user = Auth::user();
         $user_id = $user->id;
-        $size = $this->filesize_format(filesize("files/"."$filename"));
+//        $size = filesize("files/"."$filename");
         $file = new File();
         $file->name = "$filename";
         $file->path = "files/"."$filename";
         $file->user_id = "$user_id";
-        $file->size = "$size";
+        $file->size = "0";
         $file->save();
     }
 

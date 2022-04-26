@@ -19,7 +19,9 @@ class CreateTariffsTable extends Migration
             $table->double('price', 10, 2)->default(0);
             $table->text('description')->nullable();
             $table->integer('limit')->nullable()->default(0);
+            $table->integer('items_limit')->default(200);
             $table->integer('duration')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

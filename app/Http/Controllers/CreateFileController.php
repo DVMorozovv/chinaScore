@@ -43,19 +43,26 @@ class CreateFileController extends Controller
 
     public function create_table(Request $req,  $id ){
 
+        $tariff = UserTariff::getUserTariff(Auth::user()->getAuthIdentifier());
+
+        if(!$tariff==null){
+            $items_limit = $tariff->items_limit;
+        }
+        else{
+            $items_limit = 1000;
+        }
+
         $title = $req->title;
         $select = $req->select;
         $isBuy = $req->isBuy;
 
-        $data = $this->createExcelService->create_excel($title, $id, $select);
-
-        $this->paymentService->buyExcel();
+        $data = $this->createExcelService->create_excel($title, $id, $select, $items_limit);
 
         $file_name = $data['file_name'];
         $file_path = $data['file_path'];
 
         if($isBuy == true){
-            return response()->download(public_path("$file_path"));
+            $this->paymentService->buyExcel();
         }
 
         $this->fileService->saveFile("$file_name".".xlsx");

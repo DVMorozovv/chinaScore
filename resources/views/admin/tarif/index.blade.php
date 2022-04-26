@@ -48,6 +48,8 @@
                                         <th>Description</th>
                                         <th>Price</th>
                                         <th>Limit</th>
+                                        <th>Items limit</th>
+                                        <th>Is active</th>
                                         <th>Duration</th>
                                         <th>Action</th>
                                     </tr>
@@ -60,6 +62,8 @@
                                         <td>{{ $tariff->description }}</td>
                                         <td>{{ $tariff->price }}</td>
                                         <td>{{ $tariff->limit }}</td>
+                                        <td>{{ $tariff->items_limit }}</td>
+                                        <td>{{ $tariff->is_active }}</td>
                                         <td>{{ $tariff->duration }}</td>
                                         <td>
                                             <div class="invoice-action display-flex">

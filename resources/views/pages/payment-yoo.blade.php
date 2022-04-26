@@ -17,40 +17,30 @@
 {{-- page content --}}
 @section('content')
 
-    <div class="mt-2 title_bg mb-2">
-        <div class="container "><h3 class="home_title">yookassa</h3></div>
-    </div>
 
     <div class="mt-2 title_bg mb-2">
         <div class="container ">
-            <h3 class="home_title">Balance: {{$balance}} </h3>
+            <h3 class="home_title">Баланс: {{$balance}} </h3>
         </div>
     </div>
 
     <form method="post" action="{{ route('payment.create') }}">
         @csrf
         <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s12 m12 l10">
                 <input id="amount" name="amount" type="number">
                 <label for="amount">Сумма платежа</label>
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input hidden id="description" name="description" value="{{\App\Enums\PaymentTypeEnum::REPLENISHMENT}}">
-            </div>
-            <div class="input-field col s12">
-                <input hidden id="user_id" name="user_id" value="{{\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier()}}">
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
-                        <i class="material-icons right">send</i>
-                    </button>
-                </div>
-            </div>
-        </div>
 
+            <input hidden id="description" name="description" value="{{\App\Enums\PaymentTypeEnum::REPLENISHMENT}}">
+            <input hidden id="user_id" name="user_id" value="{{\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier()}}">
+
+            <div class="input-field col s12 m12 l2">
+                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Пополнить
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
     </form>
 
 

@@ -23,8 +23,8 @@
             <div class="contact-header">
                 <div class="row contact-us ml-0 mr-0">
                     <div class="col s12 m12 l4 {{--sidebar-title--}}">
-                        <h5 class="m-0"><i class="material-icons contact-icon vertical-text-top">mail_outline</i> Contact Us</h5>
-                        <p class="m-0 font-weight-500 mt-6 hide-on-med-and-down text-ellipsis">Looking for design partner?</p>
+                        <h5 class="m-0"><i class="material-icons contact-icon vertical-text-top">mail_outline</i>  Как с нами связаться</h5>
+                        <p class="m-0 font-weight-500 mt-6 hide-on-med-and-down text-ellipsis">Возникли вопросы?</p>
                         <span class="social-icons hide-on-med-and-down">
 {{--                            <i class="fab fa-behance"></i>--}}
 {{--                            <i class="fab fa-dribbble ml-5"></i>--}}
@@ -33,8 +33,7 @@
                         </span>
                     </div>
                     <div class="col s12 m12 l8 form-header">
-                        <h6 class="form-header-text"><i class="material-icons"> mail_outline </i> Write us a few words about your
-                            project.</h6>
+                        <h6 class="form-header-text"><i class="material-icons"> mail_outline </i>Связаться с технической поддержкой</h6>
                     </div>
                 </div>
             </div>
@@ -48,17 +47,18 @@
                             <div class="sidebar-content">
                                 <div class="sidebar-menu list-group position-relative">
                                     <div class="sidebar-list-padding app-sidebar contact-app-sidebar" id="contact-sidenav">
-                                        <ul class="contact-list display-grid">
-                                            <li>
-                                                <h5 class="m-0">What will be next step?</h5>
-                                            </li>
-                                            <li>
-                                                <h6 class="mt-5 line-height">You are one step closer to build your perfect product</h6>
-                                            </li>
-                                            <li>
-                                                <hr class="mt-5">
-                                            </li>
-                                        </ul>
+                                        <hr class="">
+{{--                                        <ul class="contact-list display-grid">--}}
+{{--                                            <li>--}}
+{{--                                                <h5 class="m-0">What will be next step?</h5>--}}
+{{--                                            </li>--}}
+{{--                                            <li>--}}
+{{--                                                <h6 class="mt-5 line-height">You are one step closer to build your perfect product</h6>--}}
+{{--                                            </li>--}}
+{{--                                            <li>--}}
+{{--                                                <hr class="mt-5">--}}
+{{--                                            </li>--}}
+{{--                                        </ul>--}}
                                         <div class="row">
                                             <!-- Place -->
                                             <div class="col s12 place mt-4 p-0">
@@ -100,22 +100,22 @@
                             <div class="row">
                                 <div class="input-field col m6 s12">
                                     <input id="name" name="name" type="text" class="" value="@if(auth()->user()){{ Auth::user()->name }} @endif">
-                                    <label for="name">Your Name</label>
+                                    <label for="name">Логин</label>
                                 </div>
                                 <div class="input-field col m6 s12">
                                     <input id="email" name="email" type="text" class="" value="@if(auth()->user()){{ Auth::user()->email }} @endif">
-                                    <label for="email">Your e-mail</label>
+                                    <label for="email">e-mail</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col m12 s12">
                                     <input id="phone-demo" name="phone-demo" type="text" class=""  value="@if(auth()->user()){{ Auth::user()->phone }} @endif">
-                                    <label for="phone-demo">Phone</label>
+                                    <label for="phone-demo">Телефон</label>
                                 </div>
                                 <div class="input-field col s12 width-100">
                                     <textarea id="message" name="message"  class="materialize-textarea"></textarea>
-                                    <label for="message">Your message</label>
-                                    <button class="waves-effect waves-light btn" type="submit">Send</button>
+                                    <label for="message">Сообщение</label>
+                                    <button class="waves-effect waves-light btn" type="submit">Отправить</button>
                                 </div>
                             </div>
                         </form>

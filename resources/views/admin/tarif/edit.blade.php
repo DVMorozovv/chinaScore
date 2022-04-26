@@ -51,6 +51,19 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
+                                    <input id="items_limit" type="text" name="items_limit" value="{{$tariff->items_limit}}">
+                                    <label for="items_limit">Limit</label>
+                                </div>
+                            </div>
+                            <div class="input-field col s12">
+                                <label for="is_active">Is active</label>
+                                <select class="form-control" name="is_active" id="is_active">
+                                    <option value="1" @if($tariff['is_active'] === 1)selected @endif>Активная</option>
+                                    <option value="0" @if($tariff['is_active'] === 0)selected @endif>Не активная</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
                                     <input id="duration" type="text" name="duration" value="{{$tariff->duration}}">
                                     <label for="duration">Duration</label>
                                 </div>

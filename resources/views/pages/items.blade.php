@@ -87,10 +87,10 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <h4 class="modal-title" id="exampleModalToggleLabel">Выберете способ сортировки товаров</h4>
-                <div class="card-alert card orange lighten-5">
-                    <div class="card-content orange-text">
+                <div class="card-alert card gradient-45deg-red-pink">
+                    <div class="card-content white-text">
                         <p>
-                            <i class="material-icons">check</i>Вы не приобрели тариф, пополните баланс чтобы продолжить!</p>
+                            <i class="material-icons">info_outline</i>  Вы не приобрели тариф, пополните баланс чтобы продолжить!</p>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -128,10 +128,10 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <h4 class="modal-title" id="exampleModalToggleLabel">Выберете способ сортировки товаров</h4>
-        <div class="card-alert card orange lighten-5">
-            <div class="card-content orange-text">
+        <div class="card-alert card gradient-45deg-red-pink">
+            <div class="card-content white-text">
                 <p>
-                    <i class="material-icons">check</i>У Вас закончился лимит скачиваний, пополнить баланс?</p>
+                    <i class="material-icons">info_outline</i>  У Вас закончился лимит скачиваний, пополнить баланс?</p>
             </div>
         </div>
       <div class="modal-body">

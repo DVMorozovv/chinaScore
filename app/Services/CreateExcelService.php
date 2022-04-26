@@ -22,9 +22,7 @@ class CreateExcelService
     }
 
 
-    public function create_excel($title, $id, $select){
-
-        $frame_limit = 10;
+    public function create_excel($title, $id, $select, $frame_limit){
 
         switch ($select){
             case 0: //По умолчанию

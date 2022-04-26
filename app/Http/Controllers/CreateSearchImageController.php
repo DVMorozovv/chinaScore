@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\UserTariff;
 use App\Services\FileService;
 use App\Services\PaymentService;
 use App\Services\SearchItemsService;
@@ -37,14 +38,21 @@ class CreateSearchImageController extends Controller
         $select = $req->select;
         $isBuy = $req->isBuy;
 
-        $data = $this->create_excel($image, $select);
-        $this->paymentService->buyExcel();
+        $tariff = UserTariff::getUserTariff(Auth::user()->getAuthIdentifier());
+        if(!$tariff==null){
+            $items_limit = $tariff->items_limit;
+        }
+        else{
+            $items_limit = 1000;
+        }
+
+        $data = $this->create_excel($image, $select, $items_limit);
 
         $file_name = $data['file_name'];
         $file_path = $data['file_path'];
 
         if($isBuy == true){
-            return response()->download(public_path("$file_path"));
+            $this->paymentService->buyExcel();
         }
 
         $this->fileService->saveFile("$file_name".".xlsx");
@@ -53,9 +61,7 @@ class CreateSearchImageController extends Controller
     }
 
 
-    public function create_excel($image, $select){
-
-        $frame_limit = 10;
+    public function create_excel($image, $select, $frame_limit){
 
         switch ($select){
             case 0: //По умолчанию

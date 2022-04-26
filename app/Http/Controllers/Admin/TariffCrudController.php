@@ -46,6 +46,7 @@ class TariffCrudController extends Controller
             $new_tarif->description = $request->description;
             $new_tarif->price = $request->price;
             $new_tarif->limit = $request->limit;
+            $new_tarif->items_limit = $request->items_limit;
             $new_tarif->duration = $request->duration;
 
             $new_tarif->save();
@@ -96,6 +97,8 @@ class TariffCrudController extends Controller
             $tariff->description = $request->description;
             $tariff->price = $request->price;
             $tariff->limit = $request->limit;
+            $tariff->items_limit = $request->items_limit;
+            $tariff->is_active = $request->is_active;
             $tariff->duration = $request->duration;
 
             $tariff->save();
