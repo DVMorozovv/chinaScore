@@ -43,4 +43,17 @@ class UserTariff extends Model
 
         return $result;
     }
+
+    public static function incTariffLimit(int $idUser){
+        $userTariff = self::getUserTariff($idUser);
+        if (isset($userTariff)) {
+            $userTariff->until_limit += 1;
+            $userTariff->save();
+        }
+    }
+
+    public static function getDefaultTariff(){
+        return Tariff::select()->where('name', '=', 'default')->get()->first();
+    }
+
 }

@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Balance;
 use App\Models\File;
+use App\Models\Tariff;
 use App\Models\UserTariff;
 use App\Services\FileService;
 use App\Services\PaymentService;
 use App\Services\SearchItemsService;
+use App\Services\TariffService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -19,49 +23,141 @@ class CreateSearchImageController extends Controller
      * @var FileService
      * @var SearchItemsService
      * @var PaymentService
+     * @var TariffService
      */
     private $fileService;
     private $searchItemsService;
     private $paymentService;
+    private $tariffService;
 
-    public function __construct(FileService $fileService, SearchItemsService $searchItemsService, PaymentService $paymentService)
+    public function __construct(FileService $fileService, SearchItemsService $searchItemsService, PaymentService $paymentService, TariffService $tariffService)
     {
 
         $this->fileService = $fileService;
         $this->searchItemsService = $searchItemsService;
         $this->paymentService = $paymentService;
+        $this->tariffService = $tariffService;
     }
 
-    public function create_table(Request $req){
+    public function checkForm(Request $req){
 
         $image = $req->image;
-        $select = $req->select;
+        $select = $req->filter;
         $isBuy = $req->isBuy;
+        $range = $req->range;
 
-        $tariff = UserTariff::getUserTariff(Auth::user()->getAuthIdentifier());
-        if(!$tariff==null){
+        $userTariff = UserTariff::getUserTariff(Auth::user()->getAuthIdentifier());
+        $defaultTariff = UserTariff::getDefaultTariff();
+        $userBalance = Balance::getBalance(Auth::user()->getAuthIdentifier());
+
+        if (isset($userTariff)){
+            $userLimit = $this->tariffService->getUserTariffLimit(Auth::user()->getAuthIdentifier());
+            $tariff = Tariff::getTariff($userTariff->tariff_id);
+            $count_excel = ceil($range / $tariff->items_limit);
+            $price = $count_excel*$defaultTariff->price;
+
+            if($isBuy == true){
+                if($userBalance >= $price){
+                    $this->create_table($image, $select, $isBuy, $range);
+                    return redirect()->route('user-files');
+                }
+                else{
+                    return redirect()->route('payment');
+                }
+            }
+            else{
+
+                if($count_excel > $userLimit){
+
+                    return redirect()->route('payment');
+                }
+                else{
+                    $this->create_table($image, $select, $isBuy, $range);
+                    return redirect()->route('user-files');
+                }
+            }
+
+//            dd($userTariff, $userLimit, $tariff, $count_excel, $userBalance, $defaultTariff);
+        }
+        else{
+            $count_excel = ceil($range / $defaultTariff->items_limit);
+            $price = $count_excel*$defaultTariff->price;
+            if($userBalance >= $price){
+                $this->create_table($image, $select, $isBuy, $range);
+                return redirect()->route('user-files');
+            }
+            else{
+                return redirect()->route('payment');
+            }
+//                        dd($userTariff, $defaultTariff,$userBalance,$count_excel,$price);
+
+        }
+
+    }
+
+    public function create_table( $image, $select, $isBuy, $range){
+
+
+//    log::info('request', [$image, $select,$isBuy , $range]);
+
+        $frame_position = 0; // позиция товара с которой начинается создаваться эксель, летит в url
+
+        $user_tariff = UserTariff::getUserTariff(Auth::user()->getAuthIdentifier());
+        if(!$user_tariff==null){
+            $tariff = Tariff::getTariff($user_tariff->tariff_id);
             $items_limit = $tariff->items_limit;
         }
         else{
             $items_limit = 1000;
         }
 
-        $data = $this->create_excel($image, $select, $items_limit);
+//    log::info('check tariff', [$user_tariff, $items_limit]);
 
-        $file_name = $data['file_name'];
-        $file_path = $data['file_path'];
+        if($range <= $items_limit){  //если юзер выбрал колво товаров меньше чем лимит по тарифу, создаем 1 эесель
+//    log::info('create 1 excel');
+            $data = $this->create_excel($image, $select, $range, $frame_position);
+            $file_name = $data['file_name'];
 
-        if($isBuy == true){
-            $this->paymentService->buyExcel();
+            if($isBuy == true){
+                $this->paymentService->buyExcel();
+            }
+
+            UserTariff::incTariffLimit(Auth::user()->getAuthIdentifier());
+
+            $this->fileService->saveFile("$file_name".".xlsx");
+        }
+        else{
+//    log::info('create many excels');
+            $items_count = $range; // вводим для подсчета остатка товаров в последней эксель, передаем ее в url -> frame_size
+            while($frame_position <= $range){  //
+//    log::info(' while($frame_position <= $range)', [$frame_position, $range]);
+//    log::info('param', ['$items_count'=>$items_count, '$items_limit' => $items_limit,$items_position]);
+                if($items_count >= $items_limit){  //
+                    $items_count -= $items_limit; // 41
+                }else
+                    $items_limit = $items_count; //
+//    log::info('URL', [$image, $select, $items_limit, $items_position, $items_limit]);
+                $data = $this->create_excel($image, $select, $items_limit, $frame_position);
+                $frame_position = $data['frame_position'];
+//    log::info('countable', ['$frame_position'=>$frame_position, '$items_count'=>$items_count, '$items_limit' => $items_limit, '$range' =>$range ]);
+                $file_name = $data['file_name'];
+
+                if($isBuy == true){
+                    $this->paymentService->buyExcel();
+                }
+
+                UserTariff::incTariffLimit(Auth::user()->getAuthIdentifier());
+
+                $this->fileService->saveFile("$file_name".".xlsx");
+
+            }
         }
 
-        $this->fileService->saveFile("$file_name".".xlsx");
-        return response()->download(public_path("$file_path"));
-
+//        return redirect()->route('user-files');
     }
 
 
-    public function create_excel($image, $select, $frame_limit){
+    public function create_excel($image, $select, $frame_limit, $items_position){
 
         switch ($select){
             case 0: //По умолчанию
@@ -86,9 +182,9 @@ class CreateSearchImageController extends Controller
         $file_name = $this->fileService->fileName();
         $file_path = 'files/'.$file_name.'.xlsx';
 
-        $frame_position = 0;
+        $frame_position = $items_position;
         $frame_size = 200;
-
+        $items_limit = $frame_limit;
 
         $data = $this->searchItemsService->SearchItems_ByImage($image, $frame_position, $frame_size, $order_by);
 
@@ -124,8 +220,12 @@ class CreateSearchImageController extends Controller
 
         $item_count = 0;
         $i =2; // номер строки в таблице
-        while($item_count < $frame_limit){  //$item_count < $total_count
+        while($item_count < $frame_limit){  //
             set_time_limit(0);
+//            log::alert('frame size', ['$frame_size'=>$frame_size, '$items_limit' => $items_limit, '$frame_limit' => $frame_limit, '$item_count'=>$item_count,'$frame_position' => $frame_position]);
+            if($items_limit < 200)  //
+                $frame_size = $items_limit;
+
             $data = $this->searchItemsService->SearchItems_ByImage($image, $frame_position, $frame_size, $order_by);
             $items = $data['items'];
 
@@ -213,12 +313,14 @@ class CreateSearchImageController extends Controller
 
             $item_count += 200;
             $frame_position += 200;
+            $items_limit -= 200;
+
             $items = [];
 
             $writer = new Xlsx($spreadsheet);
             $writer->save("$file_path");
         }
-        return ['file_name'=>$file_name, 'file_path'=>$file_path];
+        return ['file_name'=>$file_name, 'file_path'=>$file_path, 'frame_position' => $frame_position];
 
     }
 }

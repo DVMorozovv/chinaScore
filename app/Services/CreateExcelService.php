@@ -22,7 +22,7 @@ class CreateExcelService
     }
 
 
-    public function create_excel($title, $id, $select, $frame_limit){
+    public function create_excel($title, $id, $select, $frame_limit, $items_position){
 
         switch ($select){
             case 0: //По умолчанию
@@ -47,8 +47,9 @@ class CreateExcelService
         $file_name = $this->fileService->fileName();
         $file_path = 'files/'.$file_name.'.xlsx';
 
-        $frame_position = 0;
+        $frame_position = $items_position;
         $frame_size = 200;
+        $items_limit = $frame_limit;
 
         if ($title == ''){
             $data = $this->searchItemsService->CategoryItems($id, $frame_position, $frame_size, $order_by);
@@ -93,8 +94,12 @@ class CreateExcelService
 
         $item_count = 0;
         $i =2; // номер строки в таблице
-        while($item_count < $frame_limit){  //$item_count < $total_count
+        while($item_count < $frame_limit){
             set_time_limit(0);
+
+            if($items_limit < 200)  //
+                $frame_size = $items_limit;
+
             if ($title == ''){
                 $data = $this->searchItemsService->CategoryItems($id, $frame_position, $frame_size, $order_by);
             }
@@ -194,15 +199,15 @@ class CreateExcelService
 
             $item_count += 200;
             $frame_position += 200;
+            $items_limit -= 200;
             $items = [];
 
             $writer = new Xlsx($spreadsheet);
             $writer->save("$file_path");
 
-//            return ['file_name'=>$file_name, 'file_path'=>$file_path];
         }
 
-        return ['file_name'=>$file_name, 'file_path'=>$file_path];
+        return ['file_name'=>$file_name, 'file_path'=>$file_path, 'frame_position' => $frame_position];
 
     }
 }

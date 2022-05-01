@@ -41,7 +41,7 @@
                                             @if($user_tariff->tariff_id == $tariff->id)
                                                 <div class="col s12 m6 l4">
                                                     <div class="card hoverable animate fadeLeft">
-                                                        <div class="card-image gradient-45deg-light-blue-cyan waves-effect">
+                                                        <div class="card-image gradient-45deg-amber-amber accent-2 waves-effect">
                                                             <div class="card-title">{{$tariff->name}}</div>
                                                             <div class="price">
                                                                 <sup><img src="/currency_ruble_white_24dp.svg" alt="ruble" style="width:auto;display: inline-block;"></sup>{{$tariff->price}}
@@ -62,7 +62,7 @@
                                             @else
                                                 <div class="col s12 m6 l4">
                                                     <div class="card hoverable animate fadeLeft">
-                                                        <div class="card-image gradient-45deg-light-blue-cyan waves-effect">
+                                                        <div class="card-image gradient-45deg-red-pink waves-effect">
                                                             <div class="card-title">{{$tariff->name}}</div>
                                                             <div class="price">
                                                                 <sup><img src="/currency_ruble_white_24dp.svg" alt="ruble" style="width:auto;display: inline-block;"></sup>{{$tariff->price}}
@@ -88,7 +88,7 @@
                                         @foreach($tariffs as $tariff)
                                             <div class="col s12 m6 l4">
                                                 <div class="card hoverable animate fadeLeft">
-                                                    <div class="card-image gradient-45deg-light-blue-cyan waves-effect">
+                                                    <div class="card-image gradient-45deg-red-pink waves-effect">
                                                         <div class="card-title">{{$tariff->name}}</div>
                                                         <div class="price">
                                                             <sup><img src="/currency_ruble_white_24dp.svg" alt="ruble" style="width:auto;display: inline-block;"></sup>{{$tariff->price}}

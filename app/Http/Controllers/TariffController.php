@@ -11,7 +11,7 @@ class TariffController extends Controller
 {
     public function index(){
 
-        $tariffs = Tariff::all();
+        $tariffs = Tariff::select()->where('is_active', '=', '1')->get();
         $user_tariff = UserTariff::getUserTariff(Auth::User()->getAuthIdentifier());
         if(empty($user_tariff)){
             return view('pages/tariff', ['tariffs'=>$tariffs]);

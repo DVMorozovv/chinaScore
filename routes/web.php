@@ -72,11 +72,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/items/search/{id}', [SearchItemsController::class, 'itemsByName'])->name('search_cat_form');//SearchItemsController
 
     Route::get('/create/{id}', [CreateFileController::class, 'create_table'])->name('create');
+    Route::get('/checkForm', [CreateFileController::class, 'checkForm'])->name('checkForm');
     Route::get('/search-title', [SearchTitleController::class, 'SearchTitle'])->name('search-title');
 
     Route::get('/search-photo', function () {return view('pages/search-photo');})->name('search-photo');
     Route::post('/search-result', [SearchItemsController::class, 'itemsByImage'])->name('searchPhotoForm');
     Route::get('/dwnld', [CreateSearchImageController::class, 'create_table'])->name('create-img');
+    Route::get('checkFormImage', [CreateSearchImageController::class, 'checkForm'])->name('checkFormImage');
 
     Route::get('/learning', [ArticleController::class, 'index'])->name('learning');
     Route::get('/learning/{id}', [ArticleController::class, 'article'])->name('article');

@@ -13,19 +13,33 @@ class TariffService
 
         if($userTariff){
             $tariff = Tariff::getTariff($userTariff->tariff_id);
+
             if($tariff->limit > $userTariff->until_limit) {
-                $userTariff->until_limit += 1;
-                $userTariff->save();
-                $result = true;
-                return $result;
+                return ['checkTariff' => true, 'userTariff'=>$userTariff, 'tariff'=>$tariff];  //есть тариф и лимит
             }
             else
-                $result = false;
-            return $result;
+              return  ['checkTariff' => false, 'userTariff'=>$userTariff, 'tariff'=>$tariff]; // тариф есть, лимит закончился
         }
         else{
-            return null;
+            return null; // нет тарифа
         }
     }
 
+    public function getUserTariffLimit($user_id){
+        $checkTariff = $this->checkTariffLimit($user_id);
+
+        if(isset($checkTariff) && $checkTariff['checkTariff'] == true){
+
+            $limit = $checkTariff['tariff']->limit - $checkTariff['userTariff']->until_limit;
+            return $limit;
+        }
+        elseif (isset($checkTariff) && $checkTariff['checkTariff'] == false){
+
+            return 0;
+        }
+        elseif ($checkTariff == null){
+
+            return null;
+        }
+    }
 }

@@ -43,7 +43,7 @@ class FileService
     {
         $user = Auth::user();
         $current = Carbon::now();
-        $file_name = $user->name.'_items-'.$current->toDateString().' '.$current->hour.'-'.$current->minute;
+        $file_name = $user->name.'_items-'.$current->toDateString().' '.$current->hour.'-'.$current->minute.'-'.$current->second;
 
         return $file_name;
     }
