@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Admin\SubscriptionCrudController;
 use App\Http\Controllers\Admin\UserTariffController;
+use App\Http\Controllers\FolderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -91,6 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/user-files', [ShowFileController::class, 'files'])->name('user-files');
     Route::get('/user-files/download', [ShowFileController::class, 'download_file'])->name('download_file');
+    Route::get('/file-folder', [FolderController::class, 'index'])->name('file-folder');
 
     Route::get('/support', function () {return view('pages/support');})->name('support');
     Route::post('/support/send', [SupportController::class, 'SupportForm'])->name('contactForm');

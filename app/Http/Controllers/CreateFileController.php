@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 
+use App\Enums\FolderMethodEnum;
 use App\Models\Balance;
 use App\Models\File;
+use App\Models\Folder;
 use App\Models\Tariff;
 use App\Models\UserTariff;
 use App\Services\CreateExcelService;
@@ -68,7 +70,7 @@ class CreateFileController extends Controller
             if($isBuy == true){
                 if($userBalance >= $price){
                     $this->create_table($id, $title, $select, $isBuy, $range);
-                    return redirect()->route('user-files');
+                    return redirect()->route('file-folder');
                 }
                 else{
                     return redirect()->route('payment');
@@ -82,7 +84,7 @@ class CreateFileController extends Controller
                 }
                 else{
                     $this->create_table($id, $title, $select, $isBuy, $range);
-                    return redirect()->route('user-files');
+                    return redirect()->route('file-folder');
                 }
             }
 
@@ -93,7 +95,7 @@ class CreateFileController extends Controller
             $price = $count_excel*$defaultTariff->price;
             if($userBalance >= $price){
                 $this->create_table($id, $title, $select, $isBuy, $range);
-                return redirect()->route('user-files');
+                return redirect()->route('file-folder');
             }
             else{
                 return redirect()->route('payment');
@@ -106,6 +108,12 @@ class CreateFileController extends Controller
 
 
     public function create_table($id, $title, $select, $isBuy, $range){
+        if (isset($title)){
+            $method = FolderMethodEnum::TITLE;
+        }else
+            $method = FolderMethodEnum::CATEGORY;
+
+        $folder = Folder::createFolder(Auth::user()->getAuthIdentifier(), $method);
 
         $frame_position = 0; // позиция товара с которой начинается создаваться эксель, летит в url
 
@@ -115,7 +123,8 @@ class CreateFileController extends Controller
             $items_limit = $tariff->items_limit;
         }
         else{
-            $items_limit = 1000;
+            $default = UserTariff::getDefaultTariff();
+            $items_limit = $default->items_limit;
         }
 
         if($range <= $items_limit){
@@ -129,11 +138,11 @@ class CreateFileController extends Controller
 
             UserTariff::incTariffLimit(Auth::user()->getAuthIdentifier());
 
-            $this->fileService->saveFile("$file_name".".xlsx");
+            $this->fileService->saveFile("$file_name".".xlsx", $folder);
         }
         else {
             $items_count = $range;
-            while($frame_position <= $range){
+            while($frame_position < $range){
 
                 if($items_count >= $items_limit){
                     $items_count -= $items_limit;
@@ -151,7 +160,7 @@ class CreateFileController extends Controller
 
                 UserTariff::incTariffLimit(Auth::user()->getAuthIdentifier());
 
-                $this->fileService->saveFile("$file_name".".xlsx");
+                $this->fileService->saveFile("$file_name".".xlsx", $folder);
 
 
             }

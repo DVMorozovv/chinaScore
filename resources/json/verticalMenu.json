@@ -84,7 +84,7 @@
       "slug": "app-chat"
     },
     {
-      "url": "user-files",
+      "url": "file-folder",
       "name": "Files",
       "i18n": "Chat",
       "class": "waves-effect waves-cyan",

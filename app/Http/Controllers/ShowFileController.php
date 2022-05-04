@@ -13,13 +13,22 @@ use App\Http\Controllers\Controller;
 
 class ShowFileController extends Controller
 {
+//    public function files(Request $req){
+//
+//        $user_id = Auth::user()->getAuthIdentifier();
+//
+//        $files = File::select()->where('user_id', '=', "$user_id")->where('created_at','<',Carbon::now()->subDays(5))->orderBy('created_at', 'desc')->get();
+//        $recently_files =  File::select()->where('user_id', '=', "$user_id")->where('created_at','>',Carbon::now()->subDays(5))->orderBy('created_at', 'desc')->get();
+//        return view('pages/user-files',  ['files'=>$files, 'recently_files'=>$recently_files]);
+//    }
+
     public function files(Request $req){
 
-        $user_id = Auth::user()->getAuthIdentifier();
+        $folder_id = $req->folder_id;
 
-        $files = File::select()->where('user_id', '=', "$user_id")->where('created_at','<',Carbon::now()->subDays(5))->orderBy('created_at', 'desc')->get();
-        $recently_files =  File::select()->where('user_id', '=', "$user_id")->where('created_at','>',Carbon::now()->subDays(5))->orderBy('created_at', 'desc')->get();
-        return view('pages/user-files',  ['files'=>$files, 'recently_files'=>$recently_files]);
+        $files = File::select()->where('folder_id', '=', $folder_id)->get();
+
+        return view('pages/files',  ['files'=>$files]);
     }
 
     public function download_file(Request $req){

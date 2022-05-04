@@ -198,7 +198,8 @@ class CreateExcelService
             }
 
             $item_count += 200;
-            $frame_position += 200;
+//            $frame_position += 200;
+            $frame_position += $frame_size;
             $items_limit -= 200;
             $items = [];
 

@@ -17,7 +17,7 @@ class CreateUserTariffsTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->onDelete('cascade')->references('id')->on('users');
 
             $table->unsignedBigInteger('tariff_id');
             $table->foreign('tariff_id')->references('id')->on('tariffs');

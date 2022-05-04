@@ -18,7 +18,7 @@ class CreateSupportsTable extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->onDelete('cascade')->references('id')->on('users');
             $table->string('phone')->nullable();
             $table->text('message')->nullable();
             $table->timestamps();

@@ -59,7 +59,7 @@
                                     <tr>
                                         <td>{{ $tariff->id }}</td>
                                         <td>{{ $tariff->name }}</td>
-                                        <td>{{ $tariff->description }}</td>
+                                        <td style="white-space: pre-line">{{ $tariff->description }}</td>
                                         <td>{{ $tariff->price }}</td>
                                         <td>{{ $tariff->limit }}</td>
                                         <td>{{ $tariff->items_limit }}</td>

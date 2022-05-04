@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\FolderMethodEnum;
 use App\Models\Balance;
 use App\Models\File;
+use App\Models\Folder;
 use App\Models\Tariff;
 use App\Models\UserTariff;
 use App\Services\FileService;
@@ -59,7 +61,7 @@ class CreateSearchImageController extends Controller
             if($isBuy == true){
                 if($userBalance >= $price){
                     $this->create_table($image, $select, $isBuy, $range);
-                    return redirect()->route('user-files');
+                    return redirect()->route('file-folder');
                 }
                 else{
                     return redirect()->route('payment');
@@ -73,7 +75,7 @@ class CreateSearchImageController extends Controller
                 }
                 else{
                     $this->create_table($image, $select, $isBuy, $range);
-                    return redirect()->route('user-files');
+                    return redirect()->route('file-folder');
                 }
             }
 
@@ -83,21 +85,21 @@ class CreateSearchImageController extends Controller
             $count_excel = ceil($range / $defaultTariff->items_limit);
             $price = $count_excel*$defaultTariff->price;
             if($userBalance >= $price){
+
                 $this->create_table($image, $select, $isBuy, $range);
-                return redirect()->route('user-files');
+                return redirect()->route('file-folder');
             }
             else{
                 return redirect()->route('payment');
             }
-//                        dd($userTariff, $defaultTariff,$userBalance,$count_excel,$price);
 
         }
 
     }
 
     public function create_table( $image, $select, $isBuy, $range){
-
-
+        $method = FolderMethodEnum::IMAGE;
+        $folder = Folder::createFolder(Auth::user()->getAuthIdentifier(), $method);
 //    log::info('request', [$image, $select,$isBuy , $range]);
 
         $frame_position = 0; // позиция товара с которой начинается создаваться эксель, летит в url
@@ -108,13 +110,14 @@ class CreateSearchImageController extends Controller
             $items_limit = $tariff->items_limit;
         }
         else{
-            $items_limit = 1000;
+            $default = UserTariff::getDefaultTariff();
+            $items_limit = $default->items_limit;
         }
 
 //    log::info('check tariff', [$user_tariff, $items_limit]);
 
         if($range <= $items_limit){  //если юзер выбрал колво товаров меньше чем лимит по тарифу, создаем 1 эесель
-//    log::info('create 1 excel');
+
             $data = $this->create_excel($image, $select, $range, $frame_position);
             $file_name = $data['file_name'];
 
@@ -124,22 +127,21 @@ class CreateSearchImageController extends Controller
 
             UserTariff::incTariffLimit(Auth::user()->getAuthIdentifier());
 
-            $this->fileService->saveFile("$file_name".".xlsx");
+            $this->fileService->saveFile("$file_name".".xlsx", $folder);
         }
         else{
-//    log::info('create many excels');
+
             $items_count = $range; // вводим для подсчета остатка товаров в последней эксель, передаем ее в url -> frame_size
-            while($frame_position <= $range){  //
-//    log::info(' while($frame_position <= $range)', [$frame_position, $range]);
-//    log::info('param', ['$items_count'=>$items_count, '$items_limit' => $items_limit,$items_position]);
+            while($frame_position < $range){  //
+
                 if($items_count >= $items_limit){  //
                     $items_count -= $items_limit; // 41
                 }else
                     $items_limit = $items_count; //
-//    log::info('URL', [$image, $select, $items_limit, $items_position, $items_limit]);
+
                 $data = $this->create_excel($image, $select, $items_limit, $frame_position);
                 $frame_position = $data['frame_position'];
-//    log::info('countable', ['$frame_position'=>$frame_position, '$items_count'=>$items_count, '$items_limit' => $items_limit, '$range' =>$range ]);
+
                 $file_name = $data['file_name'];
 
                 if($isBuy == true){
@@ -148,7 +150,7 @@ class CreateSearchImageController extends Controller
 
                 UserTariff::incTariffLimit(Auth::user()->getAuthIdentifier());
 
-                $this->fileService->saveFile("$file_name".".xlsx");
+                $this->fileService->saveFile("$file_name".".xlsx", $folder);
 
             }
         }
@@ -222,10 +224,10 @@ class CreateSearchImageController extends Controller
         $i =2; // номер строки в таблице
         while($item_count < $frame_limit){  //
             set_time_limit(0);
-//            log::alert('frame size', ['$frame_size'=>$frame_size, '$items_limit' => $items_limit, '$frame_limit' => $frame_limit, '$item_count'=>$item_count,'$frame_position' => $frame_position]);
+            log::alert('frame size', ['$frame_size'=>$frame_size, '$items_limit' => $items_limit, '$frame_limit' => $frame_limit, '$item_count'=>$item_count,'$frame_position' => $frame_position]);
             if($items_limit < 200)  //
                 $frame_size = $items_limit;
-
+            log::alert('frame size', ['$frame_size'=>$frame_size, '$items_limit' => $items_limit, '$frame_limit' => $frame_limit, '$item_count'=>$item_count,'$frame_position' => $frame_position]);
             $data = $this->searchItemsService->SearchItems_ByImage($image, $frame_position, $frame_size, $order_by);
             $items = $data['items'];
 
@@ -312,7 +314,8 @@ class CreateSearchImageController extends Controller
             }
 
             $item_count += 200;
-            $frame_position += 200;
+//            $frame_position += 200;
+            $frame_position += $frame_size;
             $items_limit -= 200;
 
             $items = [];

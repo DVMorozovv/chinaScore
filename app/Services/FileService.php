@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Enums\FolderMethodEnum;
 use App\Models\File;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -27,15 +28,16 @@ class FileService
         return $filesize.$formats[$format];
     }
 
-    public function saveFile($filename){
-        $user = Auth::user();
-        $user_id = $user->id;
-//        $size = filesize("files/"."$filename");
+    public function saveFile($filename, $folder){
+
+        $user_id = Auth::user()->getAuthIdentifier();
+
         $file = new File();
         $file->name = "$filename";
         $file->path = "files/"."$filename";
         $file->user_id = "$user_id";
         $file->size = "0";
+        $file->folder_id = $folder->id;
         $file->save();
     }
 
@@ -43,12 +45,10 @@ class FileService
     {
         $user = Auth::user();
         $current = Carbon::now();
-        $file_name = $user->name.'_items-'.$current->toDateString().' '.$current->hour.'-'.$current->minute.'-'.$current->second;
+        $file_name = $user->name.' '.$current->toDateString().' '.$current->hour.'.'.$current->minute.'.'.$current->second;
 
         return $file_name;
     }
-
-
 
 
 }

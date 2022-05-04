@@ -18,7 +18,7 @@ class CreateReferalPaymentsTable extends Migration
             $table->unsignedBigInteger('transaction_id');
             $table->foreign('transaction_id')->references('id')->on('transactions');
             $table->unsignedBigInteger('referal_id');
-            $table->foreign('referal_id')->references('id')->on('users');
+            $table->foreign('referal_id')->onDelete('cascade')->references('id')->on('users');
             $table->timestamps();
         });
     }
