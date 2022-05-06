@@ -31,3 +31,8 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 .app-file-label{
     font-weight: 500 !important;
 }
+
+.plans-container .collection .collection-item-close:before {
+    content: "close";
+    color: red;
+}

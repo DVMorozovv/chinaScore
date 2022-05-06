@@ -39,6 +39,36 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
+                            <textarea id="description_2" name="description_2" class="materialize-textarea"></textarea>
+                            <label for="description_2">Description-2</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="description_3" name="description_3" class="materialize-textarea"></textarea>
+                            <label for="description_3">Description-3</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="description_4" name="description_4" class="materialize-textarea"></textarea>
+                            <label for="description_4">Description-4</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="description_5" name="description_5" class="materialize-textarea"></textarea>
+                            <label for="description_5">Description-5</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="description_6" name="description_6" class="materialize-textarea"></textarea>
+                            <label for="description_6">Description-6</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
                             <input id="price" type="text" name="price">
                             <label for="price">Price</label>
                         </div>

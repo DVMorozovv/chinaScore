@@ -40,12 +40,17 @@
                                     is to call the construction function.</p>
                             </div>
                             <div class="col s12">
-                                <table id="data-table-simple" class="display">
+                                <table id="scroll-vert-hor" class="display">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Description</th>
+                                        <th>Description-1</th>
+                                        <th>2</th>
+                                        <th>3</th>
+                                        <th>4</th>
+                                        <th>5</th>
+                                        <th>6</th>
                                         <th>Price</th>
                                         <th>Limit</th>
                                         <th>Items limit</th>
@@ -60,6 +65,11 @@
                                         <td>{{ $tariff->id }}</td>
                                         <td>{{ $tariff->name }}</td>
                                         <td style="white-space: pre-line">{{ $tariff->description }}</td>
+                                        <td style="white-space: pre-line">{{ $tariff->description_2 }}</td>
+                                        <td style="white-space: pre-line">{{ $tariff->description_3 }}</td>
+                                        <td style="white-space: pre-line">{{ $tariff->description_4 }}</td>
+                                        <td style="white-space: pre-line">{{ $tariff->description_5 }}</td>
+                                        <td style="white-space: pre-line">{{ $tariff->description_6 }}</td>
                                         <td>{{ $tariff->price }}</td>
                                         <td>{{ $tariff->limit }}</td>
                                         <td>{{ $tariff->items_limit }}</td>

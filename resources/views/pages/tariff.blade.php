@@ -45,13 +45,37 @@
                                                             <div class="card-title">{{$tariff->name}}</div>
                                                             <div class="price">
                                                                 <sup><img src="/currency_ruble_white_24dp.svg" alt="ruble" style="width:auto;display: inline-block;"></sup>{{$tariff->price}}
-                                                                <sub>/<span>month</span></sub>
+{{--                                                                <sub>/<span>month</span></sub>--}}
                                                             </div>
                                                         </div>
                                                         <div class="card-content">
                                                             <ul class="collection">
-                                                                <li class="collection-item">{{$tariff->limit}} excels</li>
-                                                                <li class="collection-item">{{$tariff->duration}} days</li>
+                                                                <li class="collection-item">{{$tariff->limit}} файлов excel</li>
+                                                                <li class="collection-item">{{$tariff->duration}} дней</li>
+                                                                @if($tariff->description != null)
+                                                                    <li class="collection-item">{{$tariff->description}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
+                                                                @if($tariff->description_2 != null)
+                                                                    <li class="collection-item">{{$tariff->description_2}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
+                                                                @if($tariff->description_3 != null)
+                                                                    <li class="collection-item">{{$tariff->description_3}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
+                                                                @if($tariff->description_4 != null)
+                                                                    <li class="collection-item">{{$tariff->description_4}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
+                                                                @if($tariff->description_5 != null)
+                                                                    <li class="collection-item">{{$tariff->description_5}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
+                                                                @if($tariff->description_6 != null)
+                                                                    <li class="collection-item">{{$tariff->description_6}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
                                                             </ul>
                                                         </div>
                                                         <div class="card-action center-align">
@@ -66,14 +90,37 @@
                                                             <div class="card-title">{{$tariff->name}}</div>
                                                             <div class="price">
                                                                 <sup><img src="/currency_ruble_white_24dp.svg" alt="ruble" style="width:auto;display: inline-block;"></sup>{{$tariff->price}}
-                                                                <sub>/<span>month</span></sub>
+{{--                                                                <sub>/<span>month</span></sub>--}}
                                                             </div>
-                                                            {{--                                                <div class="price-desc">Free 1 month</div>--}}
                                                         </div>
                                                         <div class="card-content">
                                                             <ul class="collection">
-                                                                <li class="collection-item">{{$tariff->limit}} excels</li>
-                                                                <li class="collection-item">{{$tariff->duration}} days</li>
+                                                                <li class="collection-item">{{$tariff->limit}} файлов excel</li>
+                                                                <li class="collection-item">{{$tariff->duration}} дней</li>
+                                                                @if($tariff->description != null)
+                                                                    <li class="collection-item">{{$tariff->description}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
+                                                                @if($tariff->description_2 != null)
+                                                                    <li class="collection-item">{{$tariff->description_2}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
+                                                                @if($tariff->description_3 != null)
+                                                                    <li class="collection-item">{{$tariff->description_3}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
+                                                                @if($tariff->description_4 != null)
+                                                                    <li class="collection-item">{{$tariff->description_4}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
+                                                                @if($tariff->description_5 != null)
+                                                                    <li class="collection-item">{{$tariff->description_5}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
+                                                                @if($tariff->description_6 != null)
+                                                                    <li class="collection-item">{{$tariff->description_6}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                                @endif
                                                             </ul>
                                                         </div>
                                                         <div class="card-action center-align">
@@ -92,14 +139,39 @@
                                                         <div class="card-title">{{$tariff->name}}</div>
                                                         <div class="price">
                                                             <sup><img src="/currency_ruble_white_24dp.svg" alt="ruble" style="width:auto;display: inline-block;"></sup>{{$tariff->price}}
-                                                            <sub>/<span>month</span></sub>
+{{--                                                            <sub>/<span>month</span></sub>--}}
                                                         </div>
                                                         {{--                                                <div class="price-desc">Free 1 month</div>--}}
                                                     </div>
                                                     <div class="card-content">
                                                         <ul class="collection">
-                                                            <li class="collection-item">{{$tariff->limit}} excels</li>
-                                                            <li class="collection-item">{{$tariff->duration}} days</li>
+                                                            <li class="collection-item">{{$tariff->limit}} файлов excel</li>
+                                                            <li class="collection-item">{{$tariff->duration}} дней</li>
+                                                            @if($tariff->description != null)
+                                                                <li class="collection-item">{{$tariff->description}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                            @endif
+                                                            @if($tariff->description_2 != null)
+                                                                <li class="collection-item">{{$tariff->description_2}}</li>
+                                                                 @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                            @endif
+                                                            @if($tariff->description_3 != null)
+                                                                <li class="collection-item">{{$tariff->description_3}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                            @endif
+                                                            @if($tariff->description_4 != null)
+                                                                <li class="collection-item">{{$tariff->description_4}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                            @endif
+                                                            @if($tariff->description_5 != null)
+                                                                <li class="collection-item">{{$tariff->description_5}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                            @endif
+                                                            @if($tariff->description_6 != null)
+                                                                <li class="collection-item">{{$tariff->description_6}}</li>
+                                                                @else <li class="collection-item collection-item-close" style="visibility: hidden"></li>
+                                                            @endif
+
                                                         </ul>
                                                     </div>
                                                     <div class="card-action center-align">

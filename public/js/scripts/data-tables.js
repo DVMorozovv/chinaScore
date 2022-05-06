@@ -66,7 +66,7 @@ $(function () {
   // Horizontal And Vertical Scroll Table
 
   $('#scroll-vert-hor').DataTable({
-    "scrollY": 200,
+    "scrollY": true,
     "scrollX": true
   })
 
@@ -122,7 +122,7 @@ $(document).ready(function () {
   })
 
 
-  // Select Every Row 
+  // Select Every Row
 
   selectAll.on('click', function () {
     $(this).toggleClass('clicked');
