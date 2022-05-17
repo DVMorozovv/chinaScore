@@ -201,23 +201,17 @@ class CreateSearchImageController extends Controller
         $sheet->setCellValue('A1', "Id item");
         $sheet->setCellValue('B1', "Title");
         $sheet->setCellValue('C1', "Price");
-        $sheet->setCellValue('D1', "Pictures");
-        $sheet->setCellValue('E1', "VendorName");
-        $sheet->setCellValue('F1', "VendorScore");
-        $sheet->setCellValue('G1', "ExternalItemUrl");
-        $sheet->setCellValue('H1', "Weight");
-        $sheet->setCellValue('I1', "ProviderType");
-        $sheet->setCellValue('J1', "VendorId");
-        $sheet->setCellValue('K1', "Language");
-        $sheet->setCellValue('L1', "Description");
-        $sheet->setCellValue('M1', "Volume");
-        $sheet->setCellValue('N1', "IsDeliverable");
-        $sheet->setCellValue('O1', "Level");
-        $sheet->setCellValue('P1', "Score");
-        $sheet->setCellValue('Q1', "UpdatedTime");
-        $sheet->setCellValue('R1', "CreatedTime");
-        $sheet->setCellValue('S1', "IsDeliverable");
-        $sheet->setCellValue('T1', "Rating");
+        $sheet->setCellValue('D1', "Price RUB");
+        $sheet->setCellValue('E1', "Pictures");
+        $sheet->setCellValue('F1', "VendorName");
+        $sheet->setCellValue('G1', "VendorScore");
+        $sheet->setCellValue('H1', "ExternalItemUrl");
+        $sheet->setCellValue('I1', "Weight");
+        $sheet->setCellValue('J1', "ProviderType");
+        $sheet->setCellValue('K1', "VendorId");
+        $sheet->setCellValue('L1', "Rating");
+        $sheet->setCellValue('M1', "normalizedRating");
+        $sheet->setCellValue('N1', "TotalSales");
 
 
         $item_count = 0;
@@ -235,86 +229,56 @@ class CreateSearchImageController extends Controller
                 $sheet->setCellValue('A'.$i,  $item['Id'] );
                 $sheet->setCellValue('B'.$i,  $item['Title'] );
                 $sheet->setCellValue('C'.$i,  $item['Price']['ConvertedPrice'] );
-                $sheet->setCellValue('D'.$i, $item['MainPictureUrl']);
-
-                if(isset($item['VendorName'])){
-                    $sheet->setCellValue('E'.$i,  $item['VendorName'] );
+                if(isset($item['Price'])){
+                    $sheet->setCellValue('D'.$i,  $item['Price']['ConvertedPriceList']['Internal']['Price'].' '.$item['Price']['ConvertedPriceList']['Internal']['Sign'] );
                 }
-                else{$sheet->setCellValue('E'.$i,  '-' );}
-                if(isset($item['VendorScore'])){
-                    $sheet->setCellValue('F'.$i,  $item['VendorScore'] );
+                else{$sheet->setCellValue('D'.$i,  '-' );}
+
+                $sheet->setCellValue('E'.$i, $item['MainPictureUrl']);
+//                $sheet->getCell('D'.$i)->getHyperlink()->setUrl("sheet://'images'!A$i");
+                if(isset($item['VendorName'])){
+                    $sheet->setCellValue('F'.$i,  $item['VendorName'] );
                 }
                 else{$sheet->setCellValue('F'.$i,  '-' );}
-                if(isset($item['ExternalItemUrl'])){
-                    $sheet->setCellValue('G'.$i,  $item['ExternalItemUrl'] );
+                if(isset($item['VendorScore'])){
+                    $sheet->setCellValue('G'.$i,  $item['VendorScore'] );
                 }
                 else{$sheet->setCellValue('G'.$i,  '-' );}
-                if(isset($item['PhysicalParameters']['Weight'])){
-                    $sheet->setCellValue('H'.$i,  $item['PhysicalParameters']['Weight'] );
+                if(isset($item['ExternalItemUrl'])){
+                    $sheet->setCellValue('H'.$i,  $item['ExternalItemUrl'] );
                 }
                 else{$sheet->setCellValue('H'.$i,  '-' );}
-                // ---------------------------------
-                if(isset($item['ProviderType'])){
-                    $sheet->setCellValue('I'.$i,  $item['ProviderType'] );
+                if(isset($item['PhysicalParameters']['Weight'])){
+                    $sheet->setCellValue('I'.$i,  $item['PhysicalParameters']['Weight'] );
                 }
                 else{$sheet->setCellValue('I'.$i,  '-' );}
-                if(isset($item['VendorId'])){
-                    $sheet->setCellValue('J'.$i,  $item['VendorId'] );
+                if(isset($item['ProviderType'])){
+                    $sheet->setCellValue('J'.$i,  $item['ProviderType'] );
                 }
                 else{$sheet->setCellValue('J'.$i,  '-' );}
-                if(isset($item['Language'])){
-                    $sheet->setCellValue('K'.$i,  $item['Language'] );
+                if(isset($item['VendorId'])){
+                    $sheet->setCellValue('K'.$i,  $item['VendorId'] );
                 }
                 else{$sheet->setCellValue('K'.$i,  '-' );}
-                if(isset($item['Description'])){
-                    $sheet->setCellValue('L'.$i,  $item['Description'] );
-                }
-                else{$sheet->setCellValue('L'.$i,  '-' );}
-                if(isset($item['Volume'])){
-                    $sheet->setCellValue('M'.$i,  $item['Volume'] );
-                }
-                else{$sheet->setCellValue('M'.$i,  '-' );}
-                if(isset($item['IsDeliverable'])){
-                    $sheet->setCellValue('N'.$i,  $item['IsDeliverable'] );
-                }
-                else{$sheet->setCellValue('N'.$i,  '-' );}
-                if(isset($item['Level'])){
-                    $sheet->setCellValue('O'.$i,  $item['Level'] );
-                }
-                else{$sheet->setCellValue('O'.$i,  '-' );}
-                if(isset($item['Score'])){
-                    $sheet->setCellValue('P'.$i,  $item['Score'] );
-                }
-                else{$sheet->setCellValue('P'.$i,  '-' );}
-                if(isset($item['UpdatedTime'])){
-                    $sheet->setCellValue('Q'.$i,  $item['UpdatedTime'] );
-                }
-                else{$sheet->setCellValue('Q'.$i,  '-' );}
-                if(isset($item['CreatedTime'])){
-                    $sheet->setCellValue('R'.$i,  $item['CreatedTime'] );
-                }
-                else{$sheet->setCellValue('R'.$i,  '-' );}
-                if(isset($item['Price']['IsDeliverable'])){
-                    $sheet->setCellValue('S'.$i,  $item['Price']['IsDeliverable'] );
-                }
-                else{$sheet->setCellValue('S'.$i,  '-' );}
 
                 if(isset($item['FeaturedValues'])){
                     foreach ($item['FeaturedValues'] as $rating){
                         if($rating['Name'] == 'rating'){
-                            $sheet->setCellValue('T'.$i,  $rating['Value'] );
-                            break;
+                            $sheet->setCellValue('L'.$i,  $rating['Value'] );
+                        }
+                        if($rating['Name'] == 'normalizedRating'){
+                            $sheet->setCellValue('M'.$i,  $rating['Value'] );
+                        }
+                        if($rating['Name'] == 'TotalSales'){
+                            $sheet->setCellValue('N'.$i,  $rating['Value'] );
                         }
                     }
                 }
-                else{$sheet->setCellValue('T'.$i,  '-' );}
-
                 // ---------------------------------
                 $i++;
             }
 
             $item_count += 200;
-//            $frame_position += 200;
             $frame_position += $frame_size;
             $items_limit -= 200;
 

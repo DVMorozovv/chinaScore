@@ -95,9 +95,10 @@ class SearchItemsService
             }
             $total_count = $data['Result']['Items']['Items']['TotalCount'];
 
-            return ['items'=>$items, 'total_count'=>$total_count];
+            return ['items'=>$items, 'total_count'=>$total_count, 'ErrorCode' => true];
         }
         else
-            echo $data['ErrorDescription'];
+            $data['ErrorCode'] = false;
+            return $data;
     }
 }

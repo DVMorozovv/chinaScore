@@ -18,6 +18,7 @@
 
 {{-- page content --}}
 @section('content')
+    @include('panels/alert')
     <h4 class="mt-4 mb-2">Поиск по картинке</h4>
     <p><b>Пример ссылки на картинку:  </b> https://www.google.ru/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png</p>
     <form class="formValidate" action="{{ route('searchPhotoForm') }}" method="POST">

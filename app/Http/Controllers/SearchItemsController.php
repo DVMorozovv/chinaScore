@@ -84,7 +84,13 @@ class SearchItemsController extends Controller
         $data["default"] = $defaultTariff;
         $data['userLimit'] = $userLimit;
 
-//        dd($data);
-        return view('/pages/itemsPhoto', $data);
+        if($data['ErrorCode'] == true){
+            return view('/pages/itemsPhoto', $data);
+        }
+        else{
+            return redirect()->back()->withErrors('Поиск по фото временно недоступен, обратитесь к администрации сайта.');
+        }
+
+
     }
 }
